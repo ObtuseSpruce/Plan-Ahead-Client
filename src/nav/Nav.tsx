@@ -6,7 +6,11 @@ import { ThemeProvider } from '@material-ui/core/styles';
 
 
 interface IUser_UpdateToken { 
-    user: Object | null, 
+  user: {
+    firstname: string,
+    pic: string,
+    position: string
+  },
     updateToken: (newToken: string)=>void 
  } 
 
@@ -15,8 +19,6 @@ interface IUser_UpdateToken {
 const Nav: React.FC< IUser_UpdateToken > = props => {
   const handleLogout = (event: React.FormEvent) => {
     event.preventDefault()
-    // TODO: Remove the token from localstorage (or cookies)
-    // TODO: Update the state of the App
     props.updateToken('')
   }
 
@@ -34,8 +36,15 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
       </div>
     </span>
   )
+    let teacherLinks = (
+       <div> </div>
+      )
 
-  // TODO: If the user is logged in, show profile page and logout links
+    let studentLinks = (
+        <div> </div>
+    )  
+        
+  //  If the user is logged in, show profile page and logout links
  if (props.user){
    links =(
      <span>
@@ -51,7 +60,41 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
       </div>
      </span>
    )
+
+   if(props.user.position == "Teacher" || props.user.position == "teacher" || props.user.position == "TEACHER" ) {
+       teacherLinks =  (
+        <span>
+          <div className="buttonNav">
+              <Link to="/newclass">
+                <Button variant="contained" color="primary" className="buttonNav">
+                  Add Class
+                  </Button>
+              </Link>
+          </div>
+       </span>
+      )
+   }
+    let userStr = props.user.position.toLowerCase() 
+    console.log("User:", userStr)
+    console.log("User ", userStr.substr(0, 7))
+
+   if( userStr.substr(0, 7)=="student") {
+     console.log("inside if")
+     studentLinks =(
+      <span>
+        <div className="buttonNav">
+            <Link to="/student">
+              <Button variant="contained" color="primary" className="buttonNav">
+                  Student Home
+                </Button>
+            </Link>
+        </div>
+    </span>
+     )
+   }
+       
  }
+
   return (
     <ThemeProvider theme={FrontTheme}>
       <AppBar>
@@ -62,8 +105,10 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
                 Home
               </Button>
           </Link>
+            {links}
+            {teacherLinks}
+            {studentLinks}
           </div>
-          {links}
         </nav>
       </AppBar>
     </ThemeProvider>

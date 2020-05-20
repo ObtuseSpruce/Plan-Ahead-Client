@@ -7,6 +7,8 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Signup from './pages/Signup'
+import NewClass from './teacher/NewClass'
+import StudentHome from './student/StudentHome'
 
 const Content = props => {
   return (
@@ -21,6 +23,13 @@ const Content = props => {
       <Route path="/signup" render={
         () => <Signup user={props.user} updateUser={props.updateUser} />
       } />
+     <Route path="/newclass" render={
+        () => <NewClass user={props.user} updateUser={props.updateUser} />
+      } />
+       <Route path="/student" render={
+        () => <StudentHome user={props.user} updateUser={props.updateUser} />
+      } />
+
     </div>
   )
 }

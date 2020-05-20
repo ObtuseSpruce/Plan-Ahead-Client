@@ -3,8 +3,9 @@ import {Redirect} from 'react-router-dom'
 
 interface PropsInt {
     user: {
-        firstName: string,
+        firstname: string,
         pic: string,
+        position: string
     }
 }
 
@@ -44,11 +45,15 @@ const Profile: React.FC<PropsInt> = (props) => {
 
   return (
     <div>
+      
       <h2>
-        {props.user.firstName}
+        {props.user.firstname}
       </h2>
-      <img src={props.user.pic} alt={props.user.firstName}></img>
-    <h2>{secretMessage}</h2>
+       <h2>
+         {secretMessage}
+      </h2>
+      <h2>{props.user.position}</h2>
+      
       </div>
   )
 }
