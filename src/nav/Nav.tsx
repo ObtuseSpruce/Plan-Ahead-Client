@@ -23,14 +23,18 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
   let links = (
     <span>
       <div className="buttonNav">
-        <Button variant="contained" color="primary" className="buttonNav">
-          <Link to="/login">Login</Link>
-        </Button>
+        <Link to="/login">
+          <Button variant="contained" color="primary" className="buttonNav">
+            Login
+          </Button>
+        </Link>
       </div>
       <div className="buttonNav">
-        <Button variant="contained" color="primary" className="buttonNav">
-          <Link to="/signup">Signup</Link>
-        </Button>
+        <Link to="/signup">
+          <Button variant="contained" color="primary" className="buttonNav">
+            Signup
+          </Button>
+        </Link>
       </div>
     </span>
   )
@@ -40,14 +44,18 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
    links =(
      <span>
       <div className="buttonNav">
-        <Button variant="contained" color="primary" className="buttonNav">
-          <Link to="/profile">profile</Link>
-        </Button>
+        <Link to="/profile">
+          <Button variant="contained" color="primary" className="buttonNav">
+            profile
+          </Button>
+        </Link>
       </div>
       <div className="buttonNav">
-        <Button variant="contained" color="primary" className="buttonNav">
-          <a href='/' onClick={handleLogout}>Logout</a>
-        </Button>
+        <a href='/' onClick={handleLogout}>
+          <Button variant="contained" color="primary" className="buttonNav">
+            Logout
+          </Button>
+        </a>
       </div>
      </span>
    )
@@ -57,11 +65,11 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
       <AppBar>
         <nav>     
           <div className="buttonNav" id="homeNav">
-          <Link to="/">
-              <Button variant="contained" color="primary" id="colorButton">
+            <Link to="/">
+              <Button variant="contained" color="primary">
                 Home
               </Button>
-          </Link>
+            </Link>
           </div>
           {links}
         </nav>
