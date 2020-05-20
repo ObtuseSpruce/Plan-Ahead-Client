@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {AppBar, Button, Typography} from '@material-ui/core'
+import {AppBar, Button} from '@material-ui/core'
 import FrontTheme from '../content/pages/FrontTheme'
 import { ThemeProvider } from '@material-ui/core/styles';
+import DownMenu from './DownMenu'
 
 
 interface IUser_UpdateToken { 
@@ -80,6 +81,13 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
                    </Button>
                </Link>
            </div>
+           <div className="buttonNav">
+           <Link to="/calendar">
+             <Button variant="contained" color="primary" className="buttonNav">
+               Calendar
+               </Button>
+           </Link>
+       </div>
         </span>
        )
     }
@@ -105,13 +113,7 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
     <ThemeProvider theme={FrontTheme}>
       <AppBar>
         <nav>
-            <div className="buttonNav" id="homeNav">
-              <Link to="/">
-                <Button variant="contained" color="primary">
-                  Home
-                </Button>
-              </Link>
-            </div>
+          <DownMenu updateToken={props.updateToken}/>
           {teacherLinks}
           {studentLinks}
           {links}
