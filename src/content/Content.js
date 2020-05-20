@@ -22,16 +22,16 @@ const Content = props => {
         () => <Profile user={props.user} updateToken={props.updateToken}/>
       } />
       <Route path="/signup" render={
-        () => <Signup user={props.user} updateUser={props.updateUser} updateToken={props.updateToken}/>
+        () => <Signup user={props.user}  updateToken={props.updateToken}/>
       } />
       <Route path="/calendar" render={
-        () => <TeacherCalendar user={props.user} updateUser={props.updateUser} />
+        () => <TeacherCalendar user={props.user}  />
       } />
      <Route path="/newclass" render={
-        () => <NewClass user={props.user} updateUser={props.updateUser} />
+        () => <NewClass user={props.user}  />
       } />
        <Route path="/student" render={
-        () => <StudentHome user={props.user} updateUser={props.updateUser} />
+        () => <StudentHome user={props.user}  />
       } />
 
     </div>

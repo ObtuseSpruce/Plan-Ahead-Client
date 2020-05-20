@@ -83,10 +83,7 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
       )
    }
     let userStr = props.user.position.toLowerCase() 
-    console.log("User:", userStr)
-    console.log("User ", userStr.substr(0, 7))
-
-   if( userStr.substr(0, 7)=="student") {
+    if( userStr.substr(0, 7)=="student") {
      console.log("inside if")
      studentLinks =(
       <span>
