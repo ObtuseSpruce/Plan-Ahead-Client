@@ -9,7 +9,7 @@ import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
-const Calendar : React.FC<{ props: any }> = props => {
+const Calendar : React.FC = () => {
     const events: EventInput[] = [{ title: "today's event", date: new Date() },
     { title: " event 1",   start  : '2020-05-19' },
     { title: "event 2 long",   start  : '2020-05-19T12:30:00' },

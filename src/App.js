@@ -10,9 +10,6 @@ import Footer from './nav/Footer'
 import Header from './nav/Header'
 import Nav from './nav/Nav'
 
-import TestFCalendar from './TestFCalendar'
-import Calendar from './components/Calendar'
-
 const App = props => {
   // Declare state variables
   let [user, setUser] = useState(null)
