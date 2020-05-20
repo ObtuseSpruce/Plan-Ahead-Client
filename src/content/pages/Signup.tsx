@@ -23,7 +23,6 @@ const Signup: React.FC<PropsInt> = props => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     //  Send the user sign up data to the server
-
     fetch(process.env.REACT_APP_SERVER_URL + 'auth/signup', {
       method: 'POST',
       body: JSON.stringify({
@@ -32,7 +31,7 @@ const Signup: React.FC<PropsInt> = props => {
         email,
         password,
         birthdate,
-        position,
+        position
       }),
       headers: {
           'Content-Type' : 'application/json'
