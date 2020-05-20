@@ -7,6 +7,8 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Signup from './pages/Signup'
+import NewClass from './teacher/NewClass'
+import StudentHome from './student/StudentHome'
 import TeacherCalendar from './teacher/TeacherCalendar'
 
 const Content = props => {
@@ -25,6 +27,13 @@ const Content = props => {
       <Route path="/calendar" render={
         () => <TeacherCalendar user={props.user} updateUser={props.updateUser} />
       } />
+     <Route path="/newclass" render={
+        () => <NewClass user={props.user} updateUser={props.updateUser} />
+      } />
+       <Route path="/student" render={
+        () => <StudentHome user={props.user} updateUser={props.updateUser} />
+      } />
+
     </div>
   )
 }
