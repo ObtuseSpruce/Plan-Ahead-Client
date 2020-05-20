@@ -1,7 +1,24 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom'
 
-const NewClass : React.FC<{  }> = () =>{
+interface PropsInt {
+    user: {
+        firstname: string,
+        pic: string,
+        position: string
+    }
+  }
+
+const NewClass : React.FC<PropsInt> = (props) => {
     let [message, setMessage] =  React.useState<String | null>(null);
+
+    if(!props.user) {
+        return <Redirect to='/login'/>
+      }
+      let userStr = props.user.position.toLowerCase() 
+       if(userStr != "teacher"){
+        return <Redirect to='/profile'/>
+      }
 
    return(
           <div>
