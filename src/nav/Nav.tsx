@@ -40,83 +40,80 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
       </div>
     </span>
   )
-    let teacherLinks = (
-       <div> </div>
-      )
 
-    let studentLinks = (
-        <div> </div>
-    )  
+  let teacherLinks = (
+      <span> </span>
+  )
+
+  let studentLinks = (
+      <span> </span>
+  )  
         
   //  If the user is logged in, show profile page and logout links
- if (props.user){
-   links =(
-     <span>
-      <div className="buttonNav">
-        <Link to="/profile">
-          <Button variant="contained" color="primary" className="buttonNav">
-            profile
-          </Button>
-        </Link>
-      </div>
-      <div className="buttonNav">
-        <a href='/' onClick={handleLogout}>
-          <Button variant="contained" color="primary" className="buttonNav">
-            Logout
-          </Button>
-        </a>
-      </div>
-     </span>
-   )
-
-   if(props.user.position == "Teacher" || props.user.position == "teacher" || props.user.position == "TEACHER" ) {
-       teacherLinks =  (
-        <span>
-          <div className="buttonNav">
-              <Link to="/newclass">
-                <Button variant="contained" color="primary" className="buttonNav">
-                  Add Class
-                  </Button>
-              </Link>
-          </div>
-       </span>
-      )
-   }
-    let userStr = props.user.position.toLowerCase() 
-    console.log("User:", userStr)
-    console.log("User ", userStr.substr(0, 7))
-
-   if( userStr.substr(0, 7)=="student") {
-     console.log("inside if")
-     studentLinks =(
+  if (props.user){
+    links =(
       <span>
-        <div className="buttonNav">
-            <Link to="/student">
-              <Button variant="contained" color="primary" className="buttonNav">
-                  Student Home
-                </Button>
-            </Link>
-        </div>
-    </span>
-     )
-   }
-       
+       <div className="buttonNav">
+         <Link to="/profile">
+           <Button variant="contained" color="primary" className="buttonNav">
+             profile
+           </Button>
+         </Link>
+       </div>
+       <div className="buttonNav">
+         <a href='/' onClick={handleLogout}>
+           <Button variant="contained" color="primary" className="buttonNav">
+             Logout
+           </Button>
+         </a>
+       </div>
+      </span>
+    )
+ 
+    if(props.user.position == "Teacher" || props.user.position == "teacher" || props.user.position == "TEACHER" ) {
+        teacherLinks =  (
+         <span>
+           <div className="buttonNav">
+               <Link to="/newclass">
+                 <Button variant="contained" color="primary" className="buttonNav">
+                   Add Class
+                   </Button>
+               </Link>
+           </div>
+        </span>
+       )
+    }
+     let userStr = props.user.position.toLowerCase() 
+     if( userStr.substr(0, 7)=="student") {
+      console.log("inside if")
+      studentLinks =(
+       <span>
+         <div className="buttonNav">
+             <Link to="/student">
+               <Button variant="contained" color="primary" className="buttonNav">
+                   Student Home
+                 </Button>
+             </Link>
+         </div>
+     </span>
+      )
+    }
  }
 
   return (
     <ThemeProvider theme={FrontTheme}>
       <AppBar>
-        <nav>     
-          <div className="buttonNav" id="homeNav">
-            <Link to="/">
-              <Button variant="contained" color="primary">
-                Home
-              </Button>
-            </Link>
-            {links}
-            {teacherLinks}
-            {studentLinks}
-          </div>
+        <nav>
+            <div className="buttonNav" id="homeNav">
+              <Link to="/">
+                <Button variant="contained" color="primary">
+                  Home
+                </Button>
+              </Link>
+            </div>
+          {teacherLinks}
+          {studentLinks}
+          {links}
         </nav>
       </AppBar>
     </ThemeProvider>

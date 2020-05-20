@@ -27,9 +27,13 @@ footer {
   margin-top:calc(5% + 60px);
   bottom: 0;
 }
+.profileNav{
+  text-align: right;
+}
 
 nav {
   text-align: left;
+  display: inline;
   height: auto;
   background-color: #fdd835;
   padding: 5px;
