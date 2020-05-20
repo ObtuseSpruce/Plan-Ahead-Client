@@ -1,4 +1,4 @@
-## MERN Auth Boilerplate (Client-side)
+# pugetsound-client
 
 The master branch contains starter code. See solution branch for working version.
 
@@ -10,4 +10,4 @@ For local development
 2. Run `npm i` (run `npm audit fix` if needed - stuff changes a lot in React!)
 3. Create a `.env.local` file at the top level 
 4. Create an environment variable called REACT_APP_SERVER_URL set to the localhost server's url
-# pugetsound-client
+
