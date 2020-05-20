@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+}
+
+/* .App-header {
+  background-color: lightslategray;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+} */
+
+main {
+  margin-top: 30px;
+  padding: 50px 0;
+  height: 100vh;
+}
+
+footer {
+  background-color: #fdd835;
+  color: #f57c00;
+  font-size: 16px;
+  padding: 15px;
+  margin-top:calc(5% + 60px);
+  bottom: 0;
+}
+
+nav {
+  text-align: left;
+  height: 8vh;
+  background-color: #fdd835;
+  padding: 5px;
+}
+#homeNav {
+  margin-left: 10px;
+}
+#colorButton {
+  color: white;
+}
+.logoName{
+  text-align: right;
+}
+.buttonNav {
+  display: inline;
+  color: white;
+  margin-right: 15px;
+}
+
+nav a,
+nav a:visited {
+  text-decoration: none;
+  font-size: 22px;
+  color: white;
+}
+
+nav a:hover {
+  color: black;
+}
+
+.red {
+  color: red;
+}
