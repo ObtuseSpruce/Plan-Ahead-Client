@@ -83,21 +83,6 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
         </span>
        )
     }
-     let userStr = props.user.position.toLowerCase() 
-     if( userStr.substr(0, 7)=="student") {
-      console.log("inside if")
-      studentLinks =(
-       <span>
-         <div className="buttonNav">
-             <Link to="/student">
-               <Button variant="contained" color="primary" className="buttonNav">
-                   Student Home
-                 </Button>
-             </Link>
-         </div>
-     </span>
-      )
-   }
     let userStr = props.user.position.toLowerCase() 
     if( userStr.substr(0, 7)=="student") {
      console.log("inside if")
