@@ -30,16 +30,14 @@ footer {
 
 nav {
   text-align: left;
-  height: 8vh;
+  height: auto;
   background-color: #fdd835;
   padding: 5px;
 }
 #homeNav {
   margin-left: 10px;
 }
-#colorButton {
-  color: white;
-}
+
 .logoName{
   text-align: right;
 }
