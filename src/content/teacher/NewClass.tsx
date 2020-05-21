@@ -34,6 +34,7 @@ const NewClass : React.FC<PropsInt> = (props) => {
 
       const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
+       
         console.log("data to send in new class: Teacher id", teacher)
         console.log("data to send in new class: Teacher classname", classname)
         console.log("data to send in new class: Teacher subject", subject)
@@ -63,10 +64,17 @@ const NewClass : React.FC<PropsInt> = (props) => {
                 response.json().then(result => {
                 console.log("result!", result)
                 })
-          })
-          .catch(err => {
-            console.log('error in adding new class by teacher', err)
-        })
+            })
+            .catch(err => {
+                console.log('error in adding new class by teacher', err)
+            })
+            
+            setClassname('')
+            setSubject('')
+            setTeacher('')
+            setStartDate('')
+            setEndDate('')
+            setMessage('')
       }
 
    return(
@@ -76,20 +84,20 @@ const NewClass : React.FC<PropsInt> = (props) => {
                    <form  onSubmit={handleSubmit}>   
                         <div>
                             <label>Classname:</label>
-                            <input name="classname" placeholder="Class name" onChange={e => setClassname(e.target.value)} /> 
+                            <input name="classname" placeholder="Class name" value= {classname} onChange={e => setClassname(e.target.value)} /> 
                         </div>
                         <div>
                             <label>Subject:</label>
-                            <input name="subject" placeholder="Subject" onChange={e => setSubject(e.target.value)}/> 
+                            <input name="subject" placeholder="Subject" value= {subject} onChange={e => setSubject(e.target.value)}/> 
                         </div> 
                              <input type="hidden" name="teacher"   value={teacher}/> 
                         <div>
                                 <label>Start Date:</label>
-                                <input type="date" name="startdate" onChange={e => setStartDate(e.target.value)} />
+                                <input type="date" name="startdate" value={startdate} onChange={e => setStartDate(e.target.value)} />
                         </div>
                         <div>
                                 <label>End Date:</label>
-                                <input type="date" name="enddate" onChange={e => setEndDate(e.target.value)} />
+                                <input type="date" name="enddate" value={enddate} onChange={e => setEndDate(e.target.value)} />
                         </div>
 
                         <button type="submit">Create Class</button>

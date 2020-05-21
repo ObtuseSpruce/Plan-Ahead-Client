@@ -67,7 +67,7 @@ const Login: React.FC<PropsInt> = props => {
             <label>Password:</label>
             <input type="password" name="password" onChange={e => setPassword(e.target.value)} />
           </div>
-          <button type="submit">Beam Me Up!</button>
+          <button type="submit">Login</button>
         </form>
     </div>
   )

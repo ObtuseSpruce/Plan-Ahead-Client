@@ -1,5 +1,6 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
+import SignupClass from './SignupClass'
 
 interface PropsInt {
   user: {
@@ -22,6 +23,7 @@ const StudentHome: React.FC<PropsInt> = (props) => {
   return (
     <div>
       <h2>Student home STUB TSX </h2>
+  
     </div>
   )
 }

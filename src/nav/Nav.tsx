@@ -102,6 +102,11 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
                   Student Home
                 </Button>
             </Link>
+            <Link to="/signupclass">
+              <Button variant="contained" color="primary" className="buttonNav">
+                  Signup For Class
+                </Button>
+            </Link>
         </div>
     </span>
      )
