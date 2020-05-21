@@ -27,7 +27,7 @@ const Calendar : React.FC = () => {
                     right: "dayGridMonth,timeGridWeek,timeGridDay"
                 }}
                 selectable={true}
-                editable={true}
+                editable={false}
                 plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
                 events={events}
                  />
