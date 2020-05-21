@@ -13,7 +13,7 @@ interface PropsInt {
 const NewClass : React.FC<PropsInt> = (props) => {
     let [message, setMessage] =  useState('') 
     let [classname, setClassname] = useState('')
-    let [teacher,setTeacher] = useState('')
+    let [teacher, setTeacher] = useState('')
     let [subject, setSubject] = useState('')
     let [startdate, setStartDate] = useState('')
     let [enddate, setEndDate] = useState('')
