@@ -12,6 +12,7 @@ import StudentHome from './student/StudentHome'
 import TeacherCalendar from './teacher/TeacherCalendar'
 import NewHW from './teacher/NewHW'
 import AllClasses from './teacher/AllClasses'
+import SignupClass from './student/SignupClass'
 
 const Content = props => {
   return (
@@ -40,6 +41,10 @@ const Content = props => {
       } />
       <Route path="/classes" render={
         () => <AllClasses user={props.user}  />
+      } />
+
+        <Route path="/signupclass" render={
+        () => <SignupClass user={props.user}  />
       } />
 
     </div>
