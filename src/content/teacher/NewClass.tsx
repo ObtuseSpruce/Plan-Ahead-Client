@@ -41,7 +41,7 @@ const NewClass : React.FC<PropsInt> = (props) => {
         console.log("data to send in new class: Teacher startdate", startdate)
         console.log("data to send in new class: Teacher enddate", enddate)
 
-        // Send the class data for this teacher to the server
+        // This request add a new class for this teacher and sends the class data for this teacher to the server
         fetch(process.env.REACT_APP_SERVER_URL + 'classes', {
             method: 'POST',
             body: JSON.stringify({

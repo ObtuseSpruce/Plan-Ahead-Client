@@ -13,6 +13,7 @@ import TeacherCalendar from './teacher/TeacherCalendar'
 import NewHW from './teacher/NewHW'
 import AllClasses from './teacher/AllClasses'
 import SignupClass from './student/SignupClass'
+import ViewSignedUpClasses from './student/ViewSignedUpClasses'
 
 const Content = props => {
   return (
@@ -45,6 +46,9 @@ const Content = props => {
 
         <Route path="/signupclass" render={
         () => <SignupClass user={props.user}  />
+      } />
+       <Route path="/viewsignedclasses" render={
+        () => <ViewSignedUpClasses user={props.user}  />
       } />
 
     </div>
