@@ -38,7 +38,12 @@ const AllClasses : React.FC<PropsInt> = (props) => {
       }
 
     useEffect(() => {
-        callApi()
+        if(props.user ){
+            let  userStr = props.user.position.toLowerCase()
+            if(userStr == 'teacher'){
+                callApi()
+            }
+        }
       }, [])
 
      // Protect this route- to only teachers can view this page
