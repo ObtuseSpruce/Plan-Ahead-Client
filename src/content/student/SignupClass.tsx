@@ -29,36 +29,31 @@ const SignupClass : React.FC<PropsInt> = (props) => {
     let [classes, setClasses] = useState<ClassModel[]>([])
     let [selectedClasses, setSelectedClasses]= useState<ClassModel[]>([])
     let [message, setMessage] = useState('')
+    let [referRedirect, setReferRedirect] = useState(false)
 
 
     // Function to call the API and retrieve the classes
     const callApi =()=>{
         fetch(process.env.REACT_APP_SERVER_URL + 'classes')
         .then(response=> response.json())
-        .then(data=>{ 
+        .then(data=>{
             let studentId = props.user._id
             // Call to server to retrive the classes that student has already signed up for
             fetch(process.env.REACT_APP_SERVER_URL + 'classes/student/'+studentId)
             .then(resp=>  resp.json() )
             .then(nestedData =>{
                 console.log('nestedData: student signed classes ',nestedData)
-                console.log('all classes ',data)
-                let filteredClasses : Array<ClassModel> = []
-    
+               // console.log('all classes ',data)
+                classes = data;
                 if(nestedData.length !== 0){
                     classes.forEach((cl)=>{
-                        let status = true
                         nestedData.forEach((nd: ClassModel)=>{
-                            if(cl._id == nd._id){
-                                status = false
-                            }
-                        }) 
-                        if(status){  filteredClasses.push(cl)  }           
+                            if(cl._id == nd._id){ cl.select = true  }
+                        })        
                     }) 
-                    setClasses(filteredClasses)
-                    console.log("filteredClasses",filteredClasses)
                 }
-                else{ setClasses(data) } 
+                setClasses(classes)
+                console.log("cl now ",classes)
             })
         })
         .catch(err=>{
@@ -83,9 +78,15 @@ const SignupClass : React.FC<PropsInt> = (props) => {
         if(userStr == "teacher"){
             return <Redirect to='/profile'/>
         }
+
+    //  Redirect to the page where user can see all the classes    
+        if(referRedirect){
+            return <Redirect to='/viewsignedclasses'/>
+        }
     
     // Creates table rows for classes    
     let allClasses =  classes.map((cl, i)=>{
+           console.log("cl",cl._id,cl.select)
         return (
                 <tr key= {i}>
                     <th>
@@ -122,18 +123,14 @@ const SignupClass : React.FC<PropsInt> = (props) => {
         classes = selectedClasses.map((cl,i)=>{
              return cl._id.toString()
         })
-        console.log("class id selected",classes)
-      
+        console.log("class id selected",classes)      
         fetch(process.env.REACT_APP_SERVER_URL + 'users/classes/'+props.user._id, {
             method: 'PUT',
             body: JSON.stringify({
                 classes
             }),
-            headers: {
-                'Content-Type' : 'application/json'
-            }
-          }
-        )
+            headers: {  'Content-Type' : 'application/json' }
+          })
         .then(response => {
             console.log("Here is the response!", response)
             if (!response.ok){
@@ -141,24 +138,22 @@ const SignupClass : React.FC<PropsInt> = (props) => {
               return
             }
             response.json().then(result => {
-              console.log("result!", result)
+            console.log("result!", result)
             })
         })
         .catch(err => {
             console.log('error in signup class submit', err)
         })
-
-        // TODO: Redirect to the page where user can see all the classes
+         // set the referRedirect to true, to redirect to the page where user can see all the classes
+        setReferRedirect(true)
     }
 
    return(
           <div>
                 <h2>Sign Up for Class</h2>
                 <span className="red">{message}</span>
-
                 <div className="signUpTable">
-                    <form onSubmit={handleSubmit}>
-                          
+                    <form onSubmit={handleSubmit}> 
                         <button type="submit">Register for Classes</button>
                     </form> 
                         <table>

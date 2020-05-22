@@ -122,6 +122,11 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
                   Signup For Class
                 </Button>
             </Link>
+            <Link to="/viewsignedclasses">
+              <Button variant="contained" color="primary" className="buttonNav">
+                  Classes Registered
+                </Button>
+            </Link>
         </div>
     </span>
      )
