@@ -1,6 +1,6 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
-import SignupClass from './SignupClass'
+
 
 interface PropsInt {
   user: {
