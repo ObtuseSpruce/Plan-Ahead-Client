@@ -30,32 +30,47 @@ const SignupClass : React.FC<PropsInt> = (props) => {
     let [selectedClasses, setSelectedClasses]= useState<ClassModel[]>([])
     let [message, setMessage] = useState('')
 
-    useEffect(() => {
-        callApi()
-      }, [])
 
-      if(!props.user) {
-        return <Redirect to='/login'/>
-      }
-      
-      let userStr = props.user.position.toLowerCase() 
-      if(userStr == "teacher"){
-        return <Redirect to='/profile'/>
-      }
-
-      // Function to call the API and retrieve the classes
-     const callApi =()=>{
+    // Function to call the API and retrieve the classes
+    const callApi =()=>{
         fetch(process.env.REACT_APP_SERVER_URL + 'classes')
         .then(response=> response.json())
         .then(data=>{
-        console.log(data)
-        setClasses(data)
+            console.log(data)
+            setClasses(data)
+            let studentId = props.user._id
+            fetch(process.env.REACT_APP_SERVER_URL + 'classes/student/'+studentId)
+            .then(resp=> resp.json())
+            .then(nestedData=>{
+                console.log('nestedData ',nestedData)
+            })
+
         })
         .catch(err=>{
         console.log("err",err)
         })
     }
 
+    useEffect(() => {
+        if(props.user ){
+            let  userStr = props.user.position.toLowerCase()
+            if(userStr !== 'teacher'){
+                callApi()
+            }
+        }
+      }, [])
+
+        if(!props.user) {
+            return <Redirect to='/login'/>
+         }
+        let userStr = props.user.position.toLowerCase() 
+        if(userStr == "teacher"){
+            return <Redirect to='/profile'/>
+        }
+    
+
+ 
+    
     let allClasses =  classes.map((cl, i)=>{
         return (
                 <tr key= {i}>
@@ -96,7 +111,7 @@ const SignupClass : React.FC<PropsInt> = (props) => {
         console.log("class id selected",classIdSelected)
       
         fetch(process.env.REACT_APP_SERVER_URL + '', {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify({
                 classIdSelected
             }),
