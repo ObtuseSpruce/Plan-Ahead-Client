@@ -31,7 +31,8 @@ interface ClassModel {
 
 interface eventModel {
     title: string,
-    start: Date
+    start: Date,
+    end: Date
 }
 
 interface PropsInt {
@@ -96,7 +97,7 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
     let events: any = []
 
     const homeworkMap = () => {
-        setHwEvents([{title: homework[5].question, start: homework[5].dateAssigned}])
+        setHwEvents([{title: homework[5].question, start: homework[5].dateAssigned, end: homework[5].dateDue}])
         console.log(events)
     }
     // const homeworkMap = homework.map((hw, i) => {
@@ -127,7 +128,7 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
                 </div>
             )
               
-        }
+    }
 
     return(
         <div>
