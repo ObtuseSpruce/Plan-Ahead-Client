@@ -1,5 +1,5 @@
 import React, {useEffect, useState, FormEvent} from 'react';
-import moment from 'moment'
+import {Redirect} from 'react-router-dom'
 
 
 // interface for Class database
@@ -60,26 +60,26 @@ const NewHW : React.FC<PropsInt> = (props) =>{
         })
       }
 
-      // calls the database to get all Students
-      const callStudentApi = () => {
-        fetch(process.env.REACT_APP_SERVER_URL + 'users/students')
-        .then(response => response.json())
-        .then(data => {
-          console.log("student data", data)
-          setAllUsers(data)
-        })
-        .catch(err => {
-          console.log("error fetching students", err)
-        })
-      }
-      // call the api functions at component load
-      callClassApi()
-      callStudentApi()
-
-      setTeacher(props.user._id)
+     
+      if(props.user ){
+        let  userStr = props.user.position.toLowerCase()
+        if(userStr == 'teacher'){
+            // call the api functions at component load
+             callClassApi()
+    
+            setTeacher(props.user._id)
+        }
+    }
     }, [])
 
-    
+    if(!props.user) {
+      return <Redirect to='/login'/>
+    }
+    let userStr = props.user.position.toLowerCase() 
+    if(userStr !== "teacher"){
+      return <Redirect to='/profile'/>
+    }
+
     //map function for option tags
     let allClassOptions = allClasses.map((allc, i) => {
         return (
@@ -95,30 +95,15 @@ const NewHW : React.FC<PropsInt> = (props) =>{
     })
 
 
-    const testSubmit = (e: FormEvent) => {
+
+    const handleSubmit = (e: FormEvent) => {
       e.preventDefault()
+      
       console.log("teacher: ",  teacher)
       console.log("students: ",  students)
       console.log("question: ",  question)
       console.log("due Date: ", dateDue)
       console.log("due Date: ", dateAssigned)
-
-
-      // let postObject = {
-      //   method: 'POST',
-      //   body: JSON.stringify({
-      //     classId,
-      //     question,
-      //     dateDue,
-      //     dateAssigned,
-      //     teacher,
-      //     students,
-      //   })
-      // }
-    }
-
-    const handleSubmit = (e: FormEvent) => {
-      e.preventDefault()
 
       fetch(process.env.REACT_APP_SERVER_URL + 'assignments/class/' + classId, {
         method: 'POST',
@@ -126,7 +111,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
           question,
           dateDue,
           dateAssigned,
-          teacher,
+          teacher
         }),
         headers: {
           'Content-Type' : 'application/json'
@@ -140,10 +125,14 @@ const NewHW : React.FC<PropsInt> = (props) =>{
             }
             response.json().then(result => {
             console.log("result!", result)
+              
             })
         })
         .catch(err => {
             console.log('error in adding new class by teacher', err)
+        })
+        .finally(()=>{
+          
         })
   }
 
@@ -151,14 +140,15 @@ const NewHW : React.FC<PropsInt> = (props) =>{
           <div>
                  <h2>Create New Assignment</h2>
                 <span className="red">{message}</span>
-                    <form onSubmit={handleSubmit}>    {/* @todo   */}
+                    <form onSubmit={handleSubmit}>    
                         <div>
                         <label>Classname:</label>
                           <select name="class" value= {classId} onChange={(e: any) => {
                             setTeacher(props.user._id)
                             setClass(e.target.value)} }>
-                            <option selected value="null">Select Class</option>
+                           <option value="null" selected>Select Class</option>
                             {allClassOptions}
+                          
                           </select>
                         </div>
 
@@ -180,7 +170,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
                         <label>Question</label> 
                           <input name="question" type="text" value={question} onChange={e => {
                             setQuestion(e.target.value)
-                          }}></input>
+                          }} required></input>
                         </div>
                          
                         <button type="submit">Add Assignment</button>
