@@ -43,7 +43,6 @@ const SignupClass : React.FC<PropsInt> = (props) => {
             .then(resp=>  resp.json() )
             .then(nestedData =>{
                 console.log('nestedData: student signed classes ',nestedData)
-               // console.log('all classes ',data)
                 classes = data;
                 if(nestedData.length !== 0){
                     classes.forEach((cl)=>{
@@ -53,7 +52,12 @@ const SignupClass : React.FC<PropsInt> = (props) => {
                     }) 
                 }
                 setClasses(classes)
+                let classselected = classes.filter((cl)=>{
+                    return cl.select == true
+                })
+                console.log("classselected",classselected)
                 console.log("cl now ",classes)
+                setSelectedClasses(classselected)
             })
         })
         .catch(err=>{
@@ -120,6 +124,7 @@ const SignupClass : React.FC<PropsInt> = (props) => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         let  classes :Array<string>  = []
+        console.log("selectedClasses",selectedClasses)
         classes = selectedClasses.map((cl,i)=>{
              return cl._id.toString()
         })
