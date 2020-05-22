@@ -68,13 +68,14 @@ const NewClass : React.FC<PropsInt> = (props) => {
             .catch(err => {
                 console.log('error in adding new class by teacher', err)
             })
-            
-            setClassname('')
-            setSubject('')
-            setTeacher('')
-            setStartDate('')
-            setEndDate('')
-            setMessage('')
+            .finally(()=>{
+              setClassname('')
+              setSubject('')
+              setTeacher('')
+              setStartDate('')
+              setEndDate('')
+              setMessage('')
+            }) 
       }
 
    return(
