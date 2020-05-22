@@ -33,8 +33,6 @@ interface PropsInt {
 
 const NewHW : React.FC<PropsInt> = (props) =>{
 
-  
-
     let [message, setMessage] =  React.useState<String | null>(null);
     //states for holding database information
     let [allClasses, setAllClasses] = React.useState<ClassModel[]>([])
@@ -121,11 +119,6 @@ const NewHW : React.FC<PropsInt> = (props) =>{
 
     const handleSubmit = (e: FormEvent) => {
       e.preventDefault()
-      
-      console.log("teacher: ",  teacher)
-      console.log("students: ",  students)
-      console.log("question: ",  question)
-
 
       fetch(process.env.REACT_APP_SERVER_URL + 'assignments/class/' + classId, {
         method: 'POST',
@@ -134,7 +127,6 @@ const NewHW : React.FC<PropsInt> = (props) =>{
           dateDue,
           dateAssigned,
           teacher,
-          students,
         }),
         headers: {
           'Content-Type' : 'application/json'
@@ -159,27 +151,19 @@ const NewHW : React.FC<PropsInt> = (props) =>{
           <div>
                  <h2>Create New Assignment</h2>
                 <span className="red">{message}</span>
-                    <form onSubmit={testSubmit}>    {/* @todo   */}
+                    <form onSubmit={handleSubmit}>    {/* @todo   */}
                         <div>
                         <label>Classname:</label>
                           <select name="class" value= {classId} onChange={(e: any) => {
                             setTeacher(props.user._id)
                             setClass(e.target.value)} }>
+                            <option selected value="null">Select Class</option>
                             {allClassOptions}
-                            <option value="null">Another Class</option>
                           </select>
                         </div>
 
                         <div>
                           <input type="hidden" name="teacher" value={teacher}></input>
-                        </div>
-
-                        <div>
-                        <label>Student: </label>
-                        <select name="students" onChange={(e: any) => {
-                          setStudent(e.target.value)} }>
-                            {studentMap}
-                        </select>
                         </div>
 
                         <div> 
