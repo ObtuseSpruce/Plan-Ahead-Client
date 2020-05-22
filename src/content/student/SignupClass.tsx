@@ -35,14 +35,13 @@ const SignupClass : React.FC<PropsInt> = (props) => {
     const callApi =()=>{
         fetch(process.env.REACT_APP_SERVER_URL + 'classes')
         .then(response=> response.json())
-        .then(data=>{
-            console.log(data)
-           // setClasses(data)
+        .then(data=>{ 
             let studentId = props.user._id
             fetch(process.env.REACT_APP_SERVER_URL + 'classes/student/'+studentId)
             .then(resp=> resp.json())
             .then(nestedData =>{
-                console.log('nestedData ',nestedData)
+                console.log('nestedData: student signed classes ',nestedData)
+                console.log('all classes ',data)
                 let filteredClasses : Array<ClassModel> = []
                 if(nestedData.length !== 0){
                     classes.forEach((cl)=>{
@@ -55,9 +54,14 @@ const SignupClass : React.FC<PropsInt> = (props) => {
                         if(status){
                             filteredClasses.push(cl)
                         }           
-                    })
+                    }) 
                     setClasses(filteredClasses)
+                    console.log("filteredClasses",filteredClasses)
                 }
+                else{
+                    setClasses(data)
+                }
+                
             })
 
         })
