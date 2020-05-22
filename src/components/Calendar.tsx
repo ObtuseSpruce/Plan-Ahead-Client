@@ -8,8 +8,18 @@ import { EventInput } from '@fullcalendar/core'
 import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
+import {homeworkModel} from '../content/teacher/TeacherCalendar'
 
-const Calendar : React.FC = () => {
+interface homeworkCalendar {
+    question:  homeworkModel,
+    dateDue: homeworkModel,
+    dateAssigned: homeworkModel,
+    teacher: homeworkModel,
+    students: homeworkModel,
+    class: homeworkModel
+}
+
+const Calendar : React.FC<homeworkCalendar> = (props) => {
     const events: EventInput[] = [{ title: "today's event", date: new Date() },
     { title: " event 1",   start  : '2020-05-19' },
     { title: "event 2 long",   start  : '2020-05-19T12:30:00' },
