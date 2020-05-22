@@ -37,12 +37,27 @@ const SignupClass : React.FC<PropsInt> = (props) => {
         .then(response=> response.json())
         .then(data=>{
             console.log(data)
-            setClasses(data)
+           // setClasses(data)
             let studentId = props.user._id
             fetch(process.env.REACT_APP_SERVER_URL + 'classes/student/'+studentId)
             .then(resp=> resp.json())
-            .then(nestedData=>{
+            .then(nestedData =>{
                 console.log('nestedData ',nestedData)
+                let filteredClasses : Array<ClassModel> = []
+                if(nestedData.length !== 0){
+                    classes.forEach((cl)=>{
+                        let status = true
+                        nestedData.forEach((nd: ClassModel)=>{
+                            if(cl._id == nd._id){
+                                status = false
+                            }
+                        }) 
+                        if(status){
+                            filteredClasses.push(cl)
+                        }           
+                    })
+                    setClasses(filteredClasses)
+                }
             })
 
         })
@@ -60,6 +75,7 @@ const SignupClass : React.FC<PropsInt> = (props) => {
         }
       }, [])
 
+    // Protect route to only students  
         if(!props.user) {
             return <Redirect to='/login'/>
          }
@@ -68,9 +84,7 @@ const SignupClass : React.FC<PropsInt> = (props) => {
             return <Redirect to='/profile'/>
         }
     
-
- 
-    
+    // Creates table rows for classes    
     let allClasses =  classes.map((cl, i)=>{
         return (
                 <tr key= {i}>
@@ -101,19 +115,19 @@ const SignupClass : React.FC<PropsInt> = (props) => {
         )    
     })
   
+    // All the classes (in the form of class id) selected by student are sent to the server 
     const handleSubmit = (e: React.FormEvent) => {
-
         e.preventDefault()
-        let  classIdSelected :Array<string>  = []
-          classIdSelected = selectedClasses.map((cl,i)=>{
+        let  classes :Array<string>  = []
+        classes = selectedClasses.map((cl,i)=>{
              return cl._id.toString()
         })
-        console.log("class id selected",classIdSelected)
+        console.log("class id selected",classes)
       
-        fetch(process.env.REACT_APP_SERVER_URL + '', {
+        fetch(process.env.REACT_APP_SERVER_URL + 'users/classes/'+props.user._id, {
             method: 'PUT',
             body: JSON.stringify({
-                classIdSelected
+                classes
             }),
             headers: {
                 'Content-Type' : 'application/json'
@@ -133,8 +147,8 @@ const SignupClass : React.FC<PropsInt> = (props) => {
         .catch(err => {
             console.log('error in signup class submit', err)
         })
-        
 
+        // TODO: Redirect to the page where user can see all the classes
     }
 
    return(
