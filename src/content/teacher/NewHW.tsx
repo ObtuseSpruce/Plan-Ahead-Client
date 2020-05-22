@@ -102,6 +102,9 @@ const NewHW : React.FC<PropsInt> = (props) =>{
       console.log("teacher: ",  teacher)
       console.log("students: ",  students)
       console.log("question: ",  question)
+      console.log("due Date: ", dateDue)
+      console.log("due Date: ", dateAssigned)
+
 
       // let postObject = {
       //   method: 'POST',
@@ -156,7 +159,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
           <div>
                  <h2>Create New Assignment</h2>
                 <span className="red">{message}</span>
-                    <form onSubmit={handleSubmit}>    {/* @todo   */}
+                    <form onSubmit={testSubmit}>    {/* @todo   */}
                         <div>
                         <label>Classname:</label>
                           <select name="class" value= {classId} onChange={(e: any) => {

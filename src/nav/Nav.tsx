@@ -99,9 +99,10 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
           <Link to="/classes">
             <Button variant="contained" color="primary" className="buttonNav">
               all classes
-              </Button>
+            </Button>
           </Link>
          </div>
+      
         </span>
        )
     }
