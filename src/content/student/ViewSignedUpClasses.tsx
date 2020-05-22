@@ -25,6 +25,7 @@ const ViewSignedUpClasses  : React.FC<PropsInt> = (props) => {
     let [classes, setclasses] = useState<ClassModel[]>([])
     let [message, setMessage] = useState('')
 
+    // Getting all the classes that a student has signed up for from the server
     const callApi =()=>{
         let studentId = props.user._id
         fetch(process.env.REACT_APP_SERVER_URL + 'classes/student/'+studentId)
