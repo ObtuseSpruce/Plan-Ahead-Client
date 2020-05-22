@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 
 import {Redirect} from 'react-router-dom'
 
@@ -37,31 +37,28 @@ const SignupClass : React.FC<PropsInt> = (props) => {
         .then(response=> response.json())
         .then(data=>{ 
             let studentId = props.user._id
+            // Call to server to retrive the classes that student has already signed up for
             fetch(process.env.REACT_APP_SERVER_URL + 'classes/student/'+studentId)
             .then(resp=> resp.json())
             .then(nestedData =>{
-                console.log('nestedData: student signed classes ',nestedData)
-                console.log('all classes ',data)
-                let filteredClasses : Array<ClassModel> = []
-                if(nestedData.length !== 0){
-                    classes.forEach((cl)=>{
-                        let status = true
-                        nestedData.forEach((nd: ClassModel)=>{
-                            if(cl._id == nd._id){
-                                status = false
-                            }
+                    console.log('nestedData: student signed classes ',nestedData)
+                    console.log('all classes ',data)
+                    let filteredClasses : Array<ClassModel> = []
+        
+                    if(nestedData.length !== 0){
+                        classes.forEach((cl)=>{
+                            let status = true
+                            nestedData.forEach((nd: ClassModel)=>{
+                                if(cl._id == nd._id){
+                                    status = false
+                                }
+                            }) 
+                            if(status){  filteredClasses.push(cl)  }           
                         }) 
-                        if(status){
-                            filteredClasses.push(cl)
-                        }           
-                    }) 
-                    setClasses(filteredClasses)
-                    console.log("filteredClasses",filteredClasses)
-                }
-                else{
-                    setClasses(data)
-                }
-                
+                        setClasses(filteredClasses)
+                        console.log("filteredClasses",filteredClasses)
+                    }
+                    else{ setClasses(data) } 
             })
 
         })
@@ -79,7 +76,7 @@ const SignupClass : React.FC<PropsInt> = (props) => {
         }
       }, [])
 
-    // Protect route to only students  
+    // Protect route- to only students can view this page
         if(!props.user) {
             return <Redirect to='/login'/>
          }
