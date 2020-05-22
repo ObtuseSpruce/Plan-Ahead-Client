@@ -39,31 +39,30 @@ const SignupClass : React.FC<PropsInt> = (props) => {
             let studentId = props.user._id
             // Call to server to retrive the classes that student has already signed up for
             fetch(process.env.REACT_APP_SERVER_URL + 'classes/student/'+studentId)
-            .then(resp=> resp.json())
+            .then(resp=>  resp.json() )
             .then(nestedData =>{
-                    console.log('nestedData: student signed classes ',nestedData)
-                    console.log('all classes ',data)
-                    let filteredClasses : Array<ClassModel> = []
-        
-                    if(nestedData.length !== 0){
-                        classes.forEach((cl)=>{
-                            let status = true
-                            nestedData.forEach((nd: ClassModel)=>{
-                                if(cl._id == nd._id){
-                                    status = false
-                                }
-                            }) 
-                            if(status){  filteredClasses.push(cl)  }           
+                console.log('nestedData: student signed classes ',nestedData)
+                console.log('all classes ',data)
+                let filteredClasses : Array<ClassModel> = []
+    
+                if(nestedData.length !== 0){
+                    classes.forEach((cl)=>{
+                        let status = true
+                        nestedData.forEach((nd: ClassModel)=>{
+                            if(cl._id == nd._id){
+                                status = false
+                            }
                         }) 
-                        setClasses(filteredClasses)
-                        console.log("filteredClasses",filteredClasses)
-                    }
-                    else{ setClasses(data) } 
+                        if(status){  filteredClasses.push(cl)  }           
+                    }) 
+                    setClasses(filteredClasses)
+                    console.log("filteredClasses",filteredClasses)
+                }
+                else{ setClasses(data) } 
             })
-
         })
         .catch(err=>{
-        console.log("err",err)
+            console.log("err in Api call on SignUp Class page",err)
         })
     }
 

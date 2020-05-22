@@ -29,17 +29,10 @@ const ViewSignedUpClasses  : React.FC<PropsInt> = (props) => {
     const callApi =()=>{
         let studentId = props.user._id
         fetch(process.env.REACT_APP_SERVER_URL + 'classes/student/'+studentId)
-        .then(response=> {response.json()
-                console.log("Here is the response!", response)
-                if (!response.ok){
-                setMessage(`${response.status} : ${response.statusText}`)
-                return
-                }
-                response.json()
-                .then(data =>{
+        .then(response=> response.json())
+        .then(data =>{
                     console.log(data)
                     setclasses(data)
-                })
         })
         .catch(err=>{
             console.log("err in Api call on viewSignedupClass page",err)
