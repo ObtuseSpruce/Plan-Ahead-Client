@@ -133,6 +133,12 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
         setHwEvents(events)
      //   console.log(events)
     }
+    // const homeworkMap = homework.map((hw, i) => {
+    //     setHwEvents(hwEvents + {title: hw.question, start: hw.dateAssigned})
+    // })
+    //     setHwEvents([{title: homework[5].question, start: homework[5].dateAssigned}])
+    //     console.log(events)
+    // }
 
     const refresh=()=>{
           setHomework([])
@@ -156,8 +162,10 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
                     events={hwEvents}
                      />
                 </div>
-            ) 
-        }
+            )
+              
+    }
+
 
         let classMap = allClasses.map((allc, i) => {
             return (
