@@ -32,6 +32,7 @@ interface ClassModel {
 interface eventModel {
     title: string,
     start: Date,
+  //  url: string,
     end: Date
 }
 
@@ -43,7 +44,7 @@ interface PropsInt {
     }
 }
 
-const TeacherCalendar: React.FC<PropsInt> = (props) => {
+const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
     let [homework, setHomework] = useState<homeworkModel[]>([])
     let [allClasses, setAllClasses] = useState<ClassModel[]>([])
     let [soloClassId, setSoloClassId] = useState('')
@@ -52,10 +53,11 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
     let events: any = []
 
     useEffect(() => {
-        const callClassApi =()=>{
-            fetch(process.env.REACT_APP_SERVER_URL + 'classes')
+        const callClassApi =(url:string)=>{
+            fetch(process.env.REACT_APP_SERVER_URL + 'classes' + url+ props.user._id)
             .then(response=> response.json())
             .then(data =>{
+                console.log("classes data",data)
                  setAllClasses(data)
             })
             .catch(err=>{
@@ -65,10 +67,11 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
           
           if(props.user ){
             let  userStr = props.user.position.toLowerCase()
-            if(userStr == 'teacher'){
-                // call the api functions at component load
-                callClassApi()
-            }
+            let url
+            if(userStr == 'teacher') { url= '/teacher/' }
+            else {  url = '/student/' }
+            // call the api functions at component load
+            callClassApi(url)
           }
 
     }, [])
@@ -76,11 +79,8 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
     if(!props.user) {
         return <Redirect to='/login'/>
       }
-      let userStr = props.user.position.toLowerCase() 
-      if(userStr !== "teacher"){
-        return <Redirect to='/profile'/>
-      }
-  
+   
+
       const callClassHW =(classid:string)=>{
         soloClassId = classid;
        // setSoloClassId(classid)
@@ -99,11 +99,6 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
     }
    
 
-    // Called when the teacher clicks the class button and it populates all the HWs for that class
-    /* let getHomework = (e: any) => {
-        e.preventDefault()
-       callClassHW()
-    } */
 
     // Called when the teacher clicks the log button and it display all the HWs for that class 
     let buttonHW = (e: any) => {
@@ -125,6 +120,7 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
                 event ={
                     title: hw.question,
                     start: hw.dateAssigned,
+                   // url: 'https://www.google.com',
                     end: hw.dateDue
                 }
                 return event
@@ -133,12 +129,7 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
         setHwEvents(events)
      //   console.log(events)
     }
-    // const homeworkMap = homework.map((hw, i) => {
-    //     setHwEvents(hwEvents + {title: hw.question, start: hw.dateAssigned})
-    // })
-    //     setHwEvents([{title: homework[5].question, start: homework[5].dateAssigned}])
-    //     console.log(events)
-    // }
+
 
     const refresh=()=>{
           setHomework([])
@@ -195,4 +186,4 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
     )
 }
 
-export default TeacherCalendar
+export default TeacherStudentCalendar

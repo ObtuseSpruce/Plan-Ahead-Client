@@ -68,6 +68,13 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
            </Button>
          </a>
        </div>
+       <div className="buttonNav">
+            <Link to="/calendar">
+              <Button variant="contained" color="primary" className="buttonNav">
+                Calendar
+                </Button>
+            </Link>
+           </div>
       </span>
     )
  
@@ -81,13 +88,7 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
                    </Button>
                </Link>
            </div>
-           <div className="buttonNav">
-            <Link to="/calendar">
-              <Button variant="contained" color="primary" className="buttonNav">
-                Calendar
-                </Button>
-            </Link>
-           </div>
+          
            <div className="buttonNav">
            <Link to="/homework">
              <Button variant="contained" color="primary" className="buttonNav">

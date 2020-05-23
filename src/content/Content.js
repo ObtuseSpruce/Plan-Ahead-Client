@@ -9,27 +9,30 @@ import Profile from './pages/Profile'
 import Signup from './pages/Signup'
 import NewClass from './teacher/NewClass'
 import StudentHome from './student/StudentHome'
-import TeacherCalendar from './teacher/TeacherCalendar'
+import TeacherStudentCalendar from '../components/TeacherStudentCalendar'
 import NewHW from './teacher/NewHW'
 import AllClasses from './teacher/AllClasses'
 import SignupClass from './student/SignupClass'
 import ViewSignedUpClasses from './student/ViewSignedUpClasses'
+
+import Login1 from './pages/Login1'
 
 const Content = props => {
   return (
     <div className="container">
       <Route exact path="/" component={Home} />
       <Route path="/login" render={
-        () => <Login user={props.user} updateToken={props.updateToken}/>
+        () => <Login1 user={props.user} updateToken={props.updateToken}/>
       } />
-      <Route path="/profile" render={
-        () => <Profile user={props.user} updateToken={props.updateToken}/>
-      } />
+    
       <Route path="/signup" render={
         () => <Signup user={props.user}  updateToken={props.updateToken}/>
       } />
       <Route path="/calendar" render={
-        () => <TeacherCalendar user={props.user}  />
+        () => <TeacherStudentCalendar user={props.user}  />
+      } />
+        <Route path="/profile" render={
+        () => <Profile user={props.user} updateToken={props.updateToken}/>
       } />
      <Route path="/newclass" render={
         () => <NewClass user={props.user}  />
