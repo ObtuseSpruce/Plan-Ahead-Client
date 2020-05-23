@@ -1,5 +1,28 @@
 import React, {useEffect, useState, FormEvent} from 'react';
 import {Redirect} from 'react-router-dom'
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Input from '@material-ui/core/Input';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
+
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: '25ch',
+  },
+}));
 
 
 // interface for Class database
@@ -31,6 +54,8 @@ interface PropsInt {
 }
 
 const NewHW : React.FC<PropsInt> = (props) =>{
+    const classes = useStyles();
+
 
     let [message, setMessage] =  React.useState<String | null>(null);
     //states for holding database information
@@ -125,7 +150,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
     //map function to create option tags for classes
     let allClassOptions = allClasses.map((allc, i) => {
       return (
-          <option value={allc._id}>{allc.classname}</option>
+          <MenuItem value={allc._id}>{allc.classname}</MenuItem>
       )
     })
 
@@ -136,33 +161,43 @@ const NewHW : React.FC<PropsInt> = (props) =>{
                 <span className="red">{message}</span>
                     <form onSubmit={handleSubmit}>    
                         <div>
-                         <label>Classname:</label>
-                          <select name="class" value= {classId} onChange={(e: any) => {
+                          <InputLabel id="classname">Classname: </InputLabel>
+                          <Select labelId="classname" name="class" value={classId} onChange={(e: any) => {
                             setTeacher(props.user._id)
                             setClassId(e.target.value)} }>
-                           <option value="" selected>Select Class</option>
+                           <MenuItem value="">
+                            <em>Select Class</em>
+                           </MenuItem>
                             {allClassOptions}
-                          </select>
+                          </Select>
                         </div>
                         <div>
-                          <input type="hidden" name="teacher" value={teacher}></input>
-                        </div>
-                      
-                        <div> 
-                          <label>Date Assigned:</label>
-                          <input name="dateAssigned" type="date" value={dateAssigned} onChange={e => setDateAssigned(e.target.value)}></input>
+                          <Input type="hidden" name="teacher" value={teacher}></Input>
                         </div>
                         <div>
-                        <label>Due Date:</label> 
-                          <input name="dateDue" type="date" value={dateDue} onChange={e => setDateDue(e.target.value)}></input>
+                            <InputLabel htmlFor="dateAssigned">Due Assigned:</InputLabel> 
+                            <Input id="dateAssigned" name="dateAssigned" type="datetime-local" value={dateAssigned} onChange={e => setDateAssigned(e.target.value)}></Input>
                         </div>
                         <div>
-                        <label>Question</label> 
-                          <input name="question" type="text" value={question} onChange={e => {
-                            setQuestion(e.target.value)
-                          }} required></input>
+                              <InputLabel htmlFor="dateDue">Due Date:</InputLabel> 
+                              <Input id="dateDue" name="dateDue" type="datetime-local" value={dateDue} onChange={e => setDateDue(e.target.value)}></Input>
                         </div>
-                        <button type="submit">Add Assignment</button>
+                        <Box display="flex" justifyContent="center">
+                          <div style={{ width: '600px' }}>
+                                  <TextField 
+                                  className="classes.textField"         
+                                  id="filled-multiline-static"
+                                  label="Homework"
+                                  multiline
+                                  rows={4}
+                                  fullWidth
+                                  defaultValue={question}
+                                  variant="filled"
+                                  onChange={e => setQuestion(e.target.value)}>
+                                  </TextField>
+                          </div>
+                        </Box>
+                        <Button variant="contained" type="submit">Add Assignment</Button>
                     </form>
           </div>
         )
