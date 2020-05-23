@@ -1,5 +1,5 @@
 // Packages
-import  React, { useState, FormEvent } from 'react'
+import React, { useState, FormEvent } from 'react'
 import {Redirect} from 'react-router-dom'
 
 interface PropsInt {
