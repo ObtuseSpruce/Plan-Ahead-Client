@@ -13,7 +13,7 @@ interface PropsInt {
   interface ClassModel {
     classname:  string;
     subject:    string;
-    teacher:   string;
+    teachername:   string;
     students:   Array<string>;
     assignments: Array<string>;
     startdate:  Date;
@@ -63,7 +63,7 @@ const ViewSignedUpClasses  : React.FC<PropsInt> = (props) => {
                     <td>{cl.classname} </td>
                     <td>{cl.subject}</td>
                     <td>{cl.startdate}</td>
-                    <td>{cl.teacher}</td>
+                    <td>{cl.teachername}</td>
                     <td>{cl.enddate}</td>
             </tr>
         )
@@ -77,7 +77,6 @@ const ViewSignedUpClasses  : React.FC<PropsInt> = (props) => {
                     <table>
                           <thead>
                                 <tr>
-                                    <th>Select</th>
                                     <th>ClassName</th>
                                     <th>Subject</th>
                                     <th> Start Date</th>
