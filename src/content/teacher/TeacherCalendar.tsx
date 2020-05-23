@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-
+import {Redirect} from 'react-router-dom'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
@@ -31,15 +31,16 @@ interface ClassModel {
 
 interface eventModel {
     title: string,
-    start: Date
+    start: Date,
+    end: Date
 }
 
 interface PropsInt {
     user: {
         firstName: string,
-        pic: string,
+        position: string,
+        _id: string
     }
-    updateToken: (newToken: string | null) => void
 }
 
 const TeacherCalendar: React.FC<PropsInt> = (props) => {
@@ -47,63 +48,99 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
     let [allClasses, setAllClasses] = useState<ClassModel[]>([])
     let [soloClassId, setSoloClassId] = useState('')
     let [hwEvents, setHwEvents] = useState<eventModel[]>([])
-
-    const callClassHW =()=>{
-        fetch(process.env.REACT_APP_SERVER_URL + 'assignments/class/' + soloClassId)
-        .then(response=> response.json())
-        .then(data =>{
-        setHomework(data)
-        })
-        .catch(err=>{
-        console.log("error fetching classes",err)
-        })
-    }
+    let [message, setMessage] = useState('')
+    let events: any = []
 
     useEffect(() => {
         const callClassApi =()=>{
             fetch(process.env.REACT_APP_SERVER_URL + 'classes')
             .then(response=> response.json())
             .then(data =>{
-            setAllClasses(data)
+                 setAllClasses(data)
             })
             .catch(err=>{
-            console.log("error fetching classes",err)
+                 console.log("error fetching classes in teacher calendar page",err)
             })
           }
-          callClassApi()
-        //   setHwEvents([{title: "how many pears", start: '2020-05-19T12:30:00'}])
+          
+          if(props.user ){
+            let  userStr = props.user.position.toLowerCase()
+            if(userStr == 'teacher'){
+                // call the api functions at component load
+                callClassApi()
+            }
+          }
 
     }, [])
     
-    let classMap = allClasses.map((allc, i) => {
-        return (
-            <option value={allc._id}>{allc.classname}</option>
-        )
-    })
-
-    let getHomework = (e: any) => {
-        e.preventDefault()
-        callClassHW()
+    if(!props.user) {
+        return <Redirect to='/login'/>
+      }
+      let userStr = props.user.position.toLowerCase() 
+      if(userStr !== "teacher"){
+        return <Redirect to='/profile'/>
+      }
+  
+      const callClassHW =(classid:string)=>{
+        soloClassId = classid;
+       // setSoloClassId(classid)
+        console.log("ClassId ",classid)
+        if(classid){
+            fetch(process.env.REACT_APP_SERVER_URL + 'assignments/class/' + classid)
+            .then(response=> response.json())
+            .then(data =>{
+                setHomework(data)
+                console.log("HW ",data)
+            })
+            .catch(err=>{
+                 console.log("error fetching assignemnets for a class in teacher calendar page",err)
+            })
+        }
     }
+   
 
+    // Called when the teacher clicks the class button and it populates all the HWs for that class
+    /* let getHomework = (e: any) => {
+        e.preventDefault()
+       callClassHW()
+    } */
+
+    // Called when the teacher clicks the log button and it display all the HWs for that class 
     let buttonHW = (e: any) => {
+        if(!soloClassId){
+            setMessage('Select the class before clicking the log button')
+        }
+        else{
+            setMessage('')
+        }
         e.preventDefault()
-        console.log(homework)
         homeworkMap()
-        Calendar()
     }
-
-    let events: any = []
 
     const homeworkMap = () => {
-        setHwEvents([{title: homework[5].question, start: homework[5].dateAssigned}])
-        console.log(events)
+     //   console.log(homework)
+        let event: eventModel
+        if(homework.length!== 0){
+         events =   homework.map((hw,i)=>{
+                event ={
+                    title: hw.question,
+                    start: hw.dateAssigned,
+                    end: hw.dateDue
+                }
+                return event
+            })
+        }
+        setHwEvents(events)
+     //   console.log(events)
     }
 
+    const refresh=()=>{
+          setHomework([])
+          setSoloClassId('')
+          setHwEvents([])
+    }
 
     const Calendar = () => {
-        // const events: EventInput[] = [{ title: "event 2 long",   start  : '2020-05-19T12:30:00' }];
-    
        return(
                 <div>
                     <FullCalendar
@@ -119,26 +156,33 @@ const TeacherCalendar: React.FC<PropsInt> = (props) => {
                     events={hwEvents}
                      />
                 </div>
-            )
-              
+            ) 
         }
+
+        let classMap = allClasses.map((allc, i) => {
+            return (
+                <option value={allc._id}>{allc.classname}</option>
+            )
+        }) 
 
     return(
         <div>
-
+              <span className="red">{message}</span>
             <div>
                 <select name="class" value= {soloClassId} onChange={(e: any) => {
-                    console.log(e.target.value)
+                    console.log("class name",e.target.value)
                     setSoloClassId(e.target.value)
+                    let classid = e.target.value
+                    callClassHW(classid)
                 }}>
+                 <option value="" selected>Select Class</option>
                 {classMap}
                 </select>
-                <button onClick={getHomework}>class</button>
+             {/*    <button onClick={getHomework}>class</button> */}
                 <button onClick={buttonHW}>log</button>
+                <button onClick={refresh}>Clear</button> 
             </div>
-
             <Calendar />
-
         </div>
     )
 }

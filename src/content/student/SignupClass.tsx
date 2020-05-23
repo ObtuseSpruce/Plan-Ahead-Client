@@ -6,7 +6,6 @@ import {Redirect} from 'react-router-dom'
 interface PropsInt {
     user: {
         firstname: string,
-        pic: string,
         position: string,
         _id: Object
     }
