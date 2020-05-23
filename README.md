@@ -1,6 +1,19 @@
 # pugetsound-client
 
-The master branch contains starter code. See solution branch for working version.
+The client-side code for Puget Sound Schools.
+
+## User Experience
+
+### Teacher
+* From the signup page, a new user specifies that they are signing up as a teacher.
+* Once logged in, the teacher user is provided with an assortment of links in the nav bar.
+* Teachers have the option of creating a new class to teach and assignments for those classes on a different page.
+* There is a calendar that contians information regarding the classes they teach.
+
+### Student
+* From the signup page, a new user specifies that they are signing up as a student.
+* Once logged in, the student can navigate to a page to sign up for classes.
+* The student 
 
 ### Get Started
 

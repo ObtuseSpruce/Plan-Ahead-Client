@@ -147,6 +147,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
                         <div>
                           <input type="hidden" name="teacher" value={teacher}></input>
                         </div>
+                      
                         <div> 
                           <label>Date Assigned:</label>
                           <input name="dateAssigned" type="date" value={dateAssigned} onChange={e => setDateAssigned(e.target.value)}></input>
