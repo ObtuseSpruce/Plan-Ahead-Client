@@ -44,7 +44,7 @@ const Profile: React.FC<PropsInt> = (props) => {
   }
 
   return (
-    <div>
+    <div className="inputField">
       
       <h2>
         {props.user.firstname}

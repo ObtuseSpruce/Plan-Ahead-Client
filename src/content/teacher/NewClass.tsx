@@ -1,5 +1,12 @@
 import React,{ useState, FormEvent }  from 'react';
 import {Redirect} from 'react-router-dom'
+import Box from '@material-ui/core/Box';
+import Input from '@material-ui/core/Input';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Button from '@material-ui/core/Button';
 
 interface PropsInt {
     user: {
@@ -25,7 +32,7 @@ const NewClass : React.FC<PropsInt> = (props) => {
     let userStr = props.user.position.toLowerCase() 
 
      if(userStr !== "teacher"){
-        return <Redirect to='/profile'/>
+        return <Redirect to='/'/>
       }
       else {
         teacher = props.user._id.toString()
@@ -79,32 +86,38 @@ const NewClass : React.FC<PropsInt> = (props) => {
       }
 
    return(
-          <div>
+        <Box display="flex" justifyContent="center">
+          <div className="inputField">
                <h2>Create New Class</h2>
                 <span className="red">{message}</span>
-                   <form  onSubmit={handleSubmit}>   
-                        <div>
-                            <label>Classname:</label>
-                            <input name="classname" placeholder="Class name" value= {classname} onChange={e => setClassname(e.target.value)} /> 
+                   <form onSubmit={handleSubmit}>   
+                   <Box display="flex" justifyContent="center" className="textBox">
+                      <div className="inputBox">
+                        <InputLabel htmlFor="classname">Classname:</InputLabel>
+                        <Input id="classname" name="classname" value= {classname} onChange={e => setClassname(e.target.value)} /> 
+                      </div>
+                      <div className="inputBox">
+                        <InputLabel>Subject:</InputLabel>
+                        <Input name="subject" value= {subject} onChange={e => setSubject(e.target.value)}/> 
+                      </div> 
+                        <Input type="hidden" name="teacher"   value={teacher}/> 
+                    </Box>
+                    <Box display="flex" justifyContent="center" className="textBox">
+                          <div className="inputBox">
+                                <InputLabel>Start Date:</InputLabel>
+                                <Input type="date" name="startdate" value={startdate} onChange={e => setStartDate(e.target.value)} />
                         </div>
-                        <div>
-                            <label>Subject:</label>
-                            <input name="subject" placeholder="Subject" value= {subject} onChange={e => setSubject(e.target.value)}/> 
-                        </div> 
-                             <input type="hidden" name="teacher"   value={teacher}/> 
-                        <div>
-                                <label>Start Date:</label>
-                                <input type="date" name="startdate" value={startdate} onChange={e => setStartDate(e.target.value)} />
+                        <div className="inputBox">
+                                <InputLabel>End Date:</InputLabel>
+                                <Input type="date" name="enddate" value={enddate} onChange={e => setEndDate(e.target.value)} />
                         </div>
-                        <div>
-                                <label>End Date:</label>
-                                <input type="date" name="enddate" value={enddate} onChange={e => setEndDate(e.target.value)} />
-                        </div>
+                    </Box>
 
-                        <button type="submit">Create Class</button>
+                        <Button variant="contained" type="submit">Create Class</Button>
                      </form>
             </div>
-          )
+          </Box>
+      )
     }
 
 export default NewClass 

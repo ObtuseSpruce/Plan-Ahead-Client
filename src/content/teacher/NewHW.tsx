@@ -155,18 +155,21 @@ const NewHW : React.FC<PropsInt> = (props) =>{
     })
 
   // Renders form to create a new assignment/hw by the teacher for a particular class
+  if(props.user){
    return(
-          <div>
+     <Box display="flex" justifyContent="center">
+          <div className="inputField">
                 <h2>Create New Assignment</h2>
                 <span className="red">{message}</span>
                     <form onSubmit={handleSubmit}>    
-                        <div>
+                    <Box  display="flex" justifyContent="center" className="textBox">
+                        <div  className="inputBox">
                           <InputLabel id="classname">Classname: </InputLabel>
                           <Select labelId="classname" name="class" value={classId} onChange={(e: any) => {
                             setTeacher(props.user._id)
                             setClassId(e.target.value)} }>
                            <MenuItem value="">
-                            <em>Select Class</em>
+                            Select Class
                            </MenuItem>
                             {allClassOptions}
                           </Select>
@@ -174,15 +177,16 @@ const NewHW : React.FC<PropsInt> = (props) =>{
                         <div>
                           <Input type="hidden" name="teacher" value={teacher}></Input>
                         </div>
-                        <div>
+                        <div className="inputBox">
                             <InputLabel htmlFor="dateAssigned">Due Assigned:</InputLabel> 
                             <Input id="dateAssigned" name="dateAssigned" type="datetime-local" value={dateAssigned} onChange={e => setDateAssigned(e.target.value)}></Input>
                         </div>
-                        <div>
+                        <div className="inputBox">
                               <InputLabel htmlFor="dateDue">Due Date:</InputLabel> 
                               <Input id="dateDue" name="dateDue" type="datetime-local" value={dateDue} onChange={e => setDateDue(e.target.value)}></Input>
                         </div>
-                        <Box display="flex" justifyContent="center">
+                      </Box>
+                      <Box display="flex" justifyContent="center" className="textBox">
                           <div style={{ width: '600px' }}>
                                   <TextField 
                                   className="classes.textField"         
@@ -196,11 +200,17 @@ const NewHW : React.FC<PropsInt> = (props) =>{
                                   onChange={e => setQuestion(e.target.value)}>
                                   </TextField>
                           </div>
-                        </Box>
-                        <Button variant="contained" type="submit">Add Assignment</Button>
+                      </Box>
+                      <Button variant="contained" type="submit">Add Assignment</Button>
                     </form>
           </div>
+        </Box>
         )
+      } else {
+        return (
+          <div>go home</div>
+        )
+      }
     }
 
 export default NewHW 
