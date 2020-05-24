@@ -1,5 +1,12 @@
 import React, { useState , useEffect } from 'react'
 import {Redirect} from 'react-router-dom'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
 
 interface PropsInt {
     user: {
@@ -60,34 +67,34 @@ const ViewSignedUpClasses  : React.FC<PropsInt> = (props) => {
     let allClasses =  classes.map((cl, i)=>{    
         return(
             <tr key= {i}>
-                    <td>{cl.classname} </td>
-                    <td>{cl.subject}</td>
-                    <td>{cl.startdate}</td>
-                    <td>{cl.teachername}</td>
-                    <td>{cl.enddate}</td>
+                    <TableCell>{cl.classname} </TableCell>
+                    <TableCell>{cl.subject}</TableCell>
+                    <TableCell>{cl.startdate}</TableCell>
+                    <TableCell>{cl.teachername}</TableCell>
+                    <TableCell>{cl.enddate}</TableCell>
             </tr>
         )
     })
 
    return(
-          <div>
+          <div className="inputField">
                <h2>Sign Up for Class</h2>
                 <span className="red">{message}</span>
                 <div className="signedUpTable">
-                    <table>
+                    <Table>
                           <thead>
                                 <tr>
-                                    <th>ClassName</th>
-                                    <th>Subject</th>
-                                    <th> Start Date</th>
-                                    <th>Teacher</th>
-                                    <th>End Date</th>
+                                    <TableCell>ClassName</TableCell>
+                                    <TableCell>Subject</TableCell>
+                                    <TableCell> Start Date</TableCell>
+                                    <TableCell>Teacher</TableCell>
+                                    <TableCell>End Date</TableCell>
                                 </tr>
                             </thead>
-                            <tbody> 
+                            <TableBody> 
                                     {allClasses}
-                            </tbody>
-                            </table>
+                            </TableBody>
+                    </Table>
                 </div>
           </div>
           )
