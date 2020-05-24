@@ -34,7 +34,7 @@ const Content = props => {
         <Route path="/profile" render={
         () => <Profile user={props.user} updateToken={props.updateToken}/>
       } />
-     <Route path="/newclass" render={
+      <Route path="/newclass" render={
         () => <NewClass user={props.user}  />
       } />
        <Route path="/student" render={
@@ -47,10 +47,10 @@ const Content = props => {
         () => <AllClasses user={props.user}  />
       } />
 
-        <Route path="/signupclass" render={
+      <Route path="/signupclass" render={
         () => <SignupClass user={props.user}  />
       } />
-       <Route path="/viewsignedclasses" render={
+      <Route path="/viewsignedclasses" render={
         () => <ViewSignedUpClasses user={props.user}  />
       } />
 
