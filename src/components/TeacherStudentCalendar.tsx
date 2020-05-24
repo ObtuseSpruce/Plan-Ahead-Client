@@ -10,8 +10,10 @@ import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 import Dialog from '@material-ui/core/Dialog';
 import { makeStyles } from '@material-ui/core/styles';
-import { blue } from '@material-ui/core/colors';
 
+import { blue } from '@material-ui/core/colors';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 
 const useStyles = makeStyles({
@@ -210,7 +212,13 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
       
         return (
           <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
-            <p>{dialogContent}</p>
+            <List>
+                <ListItem>
+                    <div className="dialogBox">
+                        <p>{dialogContent}</p>
+                    </div>
+                </ListItem>
+            </List>
           </Dialog>
         );
       }
