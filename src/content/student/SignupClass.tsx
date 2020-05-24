@@ -1,4 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+
+
+
 
 import {Redirect} from 'react-router-dom'
 
@@ -92,7 +102,7 @@ const SignupClass : React.FC<PropsInt> = (props) => {
            console.log("cl",cl._id,cl.select)
         return (
                 <tr key= {i}>
-                    <th>
+                    <TableCell>
                             <input type="checkbox" 
                             onChange={(event: React.ChangeEvent<HTMLInputElement>)=>{
                             let checked = event.target.checked
@@ -109,12 +119,12 @@ const SignupClass : React.FC<PropsInt> = (props) => {
                                 setSelectedClasses(classesWithSelect)
                         }} 
                         checked={cl.select}></input>
-                    </th> 
-                    <td>{cl.classname} </td>
-                    <td>{cl.subject}</td>
-                    <td>{cl.startdate}</td>
-                    <td>{cl.teachername}</td>
-                    <td>{cl.enddate}</td>
+                    </TableCell> 
+                    <TableCell>{cl.classname} </TableCell>
+                    <TableCell>{cl.subject}</TableCell>
+                    <TableCell>{cl.startdate}</TableCell>
+                    <TableCell>{cl.teachername}</TableCell>
+                    <TableCell>{cl.enddate}</TableCell>
                 </tr>
         )    
     })
@@ -153,28 +163,28 @@ const SignupClass : React.FC<PropsInt> = (props) => {
     }
 
    return(
-          <div>
+          <div className="inputField">
                 <h2>Sign Up for Class</h2>
                 <span className="red">{message}</span>
                 <div className="signUpTable">
                     <form onSubmit={handleSubmit}> 
-                        <button type="submit">Register for Classes</button>
+                        <Button type="submit" variant="contained">Register for Classes</Button>
                     </form> 
-                        <table>
-                                <thead>
-                                    <tr>
-                                        <th>Select</th>
-                                        <th>ClassName</th>
-                                        <th>Subject</th>
-                                        <th> Start Date</th>
-                                        <th>Teacher</th>
-                                        <th>End Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody> 
+                        <Table>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell>Select</TableCell>
+                                        <TableCell>ClassName</TableCell>
+                                        <TableCell>Subject</TableCell>
+                                        <TableCell> Start Date</TableCell>
+                                        <TableCell>Teacher</TableCell>
+                                        <TableCell>End Date</TableCell>
+                                    </TableRow>
+                                </TableBody>
+                                <TableBody> 
                                     {allClasses}
-                                </tbody>
-                        </table>
+                                </TableBody>
+                        </Table>
                 </div>
           </div>
           )

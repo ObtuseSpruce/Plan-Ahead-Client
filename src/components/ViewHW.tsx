@@ -119,7 +119,7 @@ const ViewHW: React.FC<PropsInt > = (props) => {
 
 
   return (
-    <div>
+    <div className="inputField">
       <h2>Homework </h2>
          {clx}
          {hwx}

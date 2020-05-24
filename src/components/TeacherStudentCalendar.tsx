@@ -14,6 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import Button from '@material-ui/core/Button'
+
 
 
 const useStyles = makeStyles({
@@ -211,12 +213,16 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
         return (
           <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
             <List>
+                <div className="inputField">
                 <ListItem>
-                    <div className="dialogBox">
+                    <div>
                         <p>{dialogContent}</p>
                     </div>
-                    <a href={HwId}>view homework</a>
                 </ListItem>
+                    <Button variant="contained">
+                        <a href={HwId}>view homework</a>
+                    </Button>
+                </div>
             </List>
           </Dialog>
         );
