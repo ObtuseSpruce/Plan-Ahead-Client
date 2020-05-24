@@ -26,11 +26,20 @@ interface ClassModel {
     startdate:  Date;
     enddate:    Date;
 }
+interface homeworkModel {
+    question:  string,
+    dateDue: Date,
+    dateAssigned: Date,
+    teacher: string,
+    students: Array<string>,
+    class: string,
+  }
 
 const AllClasses : React.FC<PropsInt> = (props) => {
 
     let [classes, setclasses] = useState<ClassModel[]>([])
     let [classId, setClassId] = useState('')
+    let [allHw, setAllHw] = useState<homeworkModel[]>([])
 
     // Function to get all the classes offered by this teacher and display them
     const callApi =()=>{
@@ -43,6 +52,20 @@ const AllClasses : React.FC<PropsInt> = (props) => {
         .catch(err=>{
             console.log("err in allClasses page for the teacher ",err)
         })
+      }
+
+      const callHwApi =()=>{
+          if(classId){
+        fetch(process.env.REACT_APP_SERVER_URL + 'assignments/class/' + classId)
+        .then(response=> response.json())
+        .then(data =>{
+            setAllHw(data)
+            console.log(data)
+        })
+        .catch(err=>{
+            console.log("err in allClasses page for the teacher ",err)
+        })
+        }
       }
 
     useEffect(() => {
@@ -66,7 +89,7 @@ const AllClasses : React.FC<PropsInt> = (props) => {
     let allClasses = classes.map((cl, i) => {
         return (
             <Box>
-                <div className="inputBox">
+                <div>
                     <Button variant="contained" value={cl._id} onClick={() => setClassId(`${cl._id}`)}>
                             {cl.classname}
                     </Button>
@@ -75,14 +98,36 @@ const AllClasses : React.FC<PropsInt> = (props) => {
         )
     })
 
+    let classHomeworkMap = allHw.map((hw, i) => {
+        return (
+            <Box>
+                <div className="inputField">
+                <div>
+                    {hw.question}
+                </div>
+                <Button onClick={() => console.log('delete this')}>Delete</Button>
+                </div>
+            </Box>
+        )
+    })
+
+
     return(
         <div>
             <div>View All Classes</div>
-            <div>
-                <Button onClick={() => console.log({classId})}>Log it</Button>
+                <div>
+                <div>
+                <Button onClick={() =>{
+                    console.log(classId)
+                    callHwApi()
+                }}>Log it</Button>
                 <Box display="flex" justifyContent="center">
                     {allClasses}
                 </Box>
+                    <div>
+                        {classHomeworkMap}
+                    </div>
+                </div>
             </div>
         </div>
     )

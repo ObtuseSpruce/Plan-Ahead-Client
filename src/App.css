@@ -1,35 +1,30 @@
 body {
-  background-color: slategray;
-  height: 100vh;
+  background-color: #355c7d;
 }
 
 .App {
+  background-color: #355c7d;
   text-align: center;
+  color: #34222e;
 }
 
-/* .App-header {
-  background-color: lightslategray;
-  min-height: 20vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
-
 main {
+  background-color: #355c7d;
   margin-top: 30px;
   padding: 50px 0;
+  height: auto;
+  min-height: calc(100vh - 70px);
 }
 
 footer {
-  background-color: #fdd835;
-  color: #f57c00;
+  background-color: white;
+  color: #333366;
   font-size: 16px;
   padding: 15px;
-  margin-top:calc(5% + 60px);
   bottom: 0;
+}
+.bigbox{
+  background-color:#DEBFCE;
 }
 .profileNav{
   text-align: right;
@@ -43,17 +38,18 @@ footer {
 }
 
 .inputField {
+  border: 2px solid #34222e;
   margin: 5px;
   border-radius: 20px 20px;
   padding: 15px;
   width: auto;
-  background-color: white
+  background-color: white;
 }
 
 nav {
   text-align: left;
   display: inline;
-  background-color: #fdd835;
+  background-color: white;
   padding: 5px;
 }
 #homeNav {
@@ -65,21 +61,12 @@ nav {
 }
 .buttonNav {
   display: inline;
-  color: white;
+  color: #333366;
   margin-right: 15px;
 }
 
-nav a,
-nav a:visited {
+nav a{
   text-decoration: none;
   font-size: 22px;
   color: white;
-}
-
-nav a:hover {
-  color: black;
-}
-
-.red {
-  color: red;
 }

@@ -60,7 +60,7 @@ const Signup: React.FC<PropsInt> = props => {
 
 
   return (
-    <div>
+    <div className="inputField">
       <h2>Signup</h2>
       <span className="red">{message}</span>
       <form onSubmit={handleSubmit}>

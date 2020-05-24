@@ -8,6 +8,8 @@ import { EventInput } from '@fullcalendar/core'
 import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
+import Dialog from '@material-ui/core/Dialog';
+
 
 interface ClassModel {
     _id: number;
@@ -150,6 +152,22 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                     selectable={true}
                     editable={false}
                     plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+                    eventClick={ function(info) {
+                        var eventObj = info.event;
+                  
+                        if (eventObj.url) {
+                          alert(
+                            'Clicked ' + eventObj.title + '.\n' +
+                            'Will open ' + eventObj.url + ' in a new tab'
+                          );
+                  
+                          window.open(eventObj.url);
+                  
+                          info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
+                        } else {
+                          alert('Clicked ' + eventObj.title);
+                        }
+                      }}
                     events={hwEvents}
                      />
                 </div>
@@ -181,7 +199,9 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                 <button onClick={buttonHW}>log</button>
                 <button onClick={refresh}>Clear</button> 
             </div>
-            <Calendar />
+            <div className="inputField">
+                <Calendar />
+            </div>
         </div>
     )
 }
