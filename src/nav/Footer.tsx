@@ -5,12 +5,14 @@ import Link from '@material-ui/core/Link';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+    {'Copyright © '}
+    <p className="footerLogo">
+      <Link color="inherit" href="https://pugetsoundclient.herokuapp.com/">
+          Plan-Ahead
       </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
+      </p>
+          {new Date().getFullYear()}
+          {'.'}
     </Typography>
   );
 }

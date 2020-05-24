@@ -8,6 +8,21 @@ import { EventInput } from '@fullcalendar/core'
 import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
+import Dialog from '@material-ui/core/Dialog';
+import { makeStyles } from '@material-ui/core/styles';
+
+import { blue } from '@material-ui/core/colors';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+
+
+const useStyles = makeStyles({
+    avatar: {
+      backgroundColor: blue[100],
+      color: blue[600],
+    },
+  });
+
 
 interface ClassModel {
     _id: string;
@@ -51,6 +66,9 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
     let [soloClassId, setSoloClassId] = useState('')
     let [hwEvents, setHwEvents] = useState<eventModel[]>([])
     let [message, setMessage] = useState('')
+    let [dialogContent, setDialogContent] = useState('')
+    let [open, setOpen] = useState(false);
+
     let events: any = []
 
     useEffect(() => {
@@ -151,6 +169,12 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                     selectable={true}
                     editable={false}
                     plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+                    eventClick={ function(info) {
+                        var eventObj = info.event;
+                        console.log(eventObj.title)
+                        setOpen(true)
+                        setDialogContent(eventObj.title)
+                      }}
                     events={hwEvents}
                      />
                 </div>
@@ -159,11 +183,44 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
     }
 
 
-        let classMap = allClasses.map((allc, i) => {
-            return (
-                <option value={allc._id}>{allc.classname}</option>
-            )
-        }) 
+    let classMap = allClasses.map((allc, i) => {
+        return (
+            <option value={allc._id}>{allc.classname}</option>
+        )
+    }) 
+
+
+/*     const handleClickOpen = () => {
+      setOpen(true);
+    }; */
+  
+    const handleClose = () => {
+      setOpen(false);
+      setDialogContent('')
+    };
+
+    function SimpleDialog(props: any) {
+        const classes = useStyles();
+        const { onClose, selectedValue, open } = props;
+      
+        const handleClose = () => {
+          onClose(selectedValue);
+        };
+      
+     
+      
+        return (
+          <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+            <List>
+                <ListItem>
+                    <div className="dialogBox">
+                        <p>{dialogContent}</p>
+                    </div>
+                </ListItem>
+            </List>
+          </Dialog>
+        );
+      }
 
     return(
         <div>
@@ -182,7 +239,10 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                 <button onClick={buttonHW}>log</button>
                 <button onClick={refresh}>Clear</button> 
             </div>
-            <Calendar />
+            <div className="inputField">
+                <Calendar />
+            </div>
+            <SimpleDialog open={open} onClose={handleClose} />
         </div>
     )
 }
