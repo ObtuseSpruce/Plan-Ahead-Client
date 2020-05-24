@@ -1,11 +1,14 @@
 # pugetsound-client
 
 The client-side code for Puget Sound Schools. 
+Deployed Link: https://pugetsoundclient.herokuapp.com/
 
 ### Server Repository
+
 This repository works in tandem with another which manages all the database and server calls.
 
-Link: https://github.com/MisterDaviso/pugetsound-schools-server
+Repository Link: https://github.com/MisterDaviso/pugetsound-schools-server
+Deployed Link: https://pugetsound-schools-server.herokuapp.com/
 
 ## User Experience
 
