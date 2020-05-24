@@ -155,6 +155,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
     })
 
   // Renders form to create a new assignment/hw by the teacher for a particular class
+  if(props.user){
    return(
      <Box display="flex" justifyContent="center">
           <div className="inputField">
@@ -204,7 +205,12 @@ const NewHW : React.FC<PropsInt> = (props) =>{
                     </form>
           </div>
         </Box>
-      )
+        )
+      } else {
+        return (
+          <div>go home</div>
+        )
+      }
     }
 
 export default NewHW 
