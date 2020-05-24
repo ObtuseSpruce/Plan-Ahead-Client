@@ -187,11 +187,6 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
             <option value={allc._id}>{allc.classname}</option>
         )
     }) 
-
-
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
   
     const handleClose = () => {
       setOpen(false);

@@ -162,27 +162,27 @@ const NewHW : React.FC<PropsInt> = (props) =>{
                 <h2>Create New Assignment</h2>
                 <span className="red">{message}</span>
                     <form onSubmit={handleSubmit}>    
+                    <div  className="inputBox">
+                      <InputLabel id="classname">Classname: </InputLabel>
+                      <Select labelId="classname" name="class" value={classId} onChange={(e: any) => {
+                        setTeacher(props.user._id)
+                        setClassId(e.target.value)} }>
+                       <MenuItem value="">
+                        Select Class
+                       </MenuItem>
+                        {allClassOptions}
+                      </Select>
+                    </div>
                     <Box  display="flex" justifyContent="center" className="textBox">
-                        <div  className="inputBox">
-                          <InputLabel id="classname">Classname: </InputLabel>
-                          <Select labelId="classname" name="class" value={classId} onChange={(e: any) => {
-                            setTeacher(props.user._id)
-                            setClassId(e.target.value)} }>
-                           <MenuItem value="">
-                            Select Class
-                           </MenuItem>
-                            {allClassOptions}
-                          </Select>
-                        </div>
                         <div>
                           <Input type="hidden" name="teacher" value={teacher}></Input>
                         </div>
                         <div className="inputBox">
-                            <InputLabel htmlFor="dateAssigned">Due Assigned:</InputLabel> 
+                            <InputLabel htmlFor="dateAssigned">Date Assigned:</InputLabel> 
                             <Input id="dateAssigned" name="dateAssigned" type="datetime-local" value={dateAssigned} onChange={e => setDateAssigned(e.target.value)}></Input>
                         </div>
                         <div className="inputBox">
-                              <InputLabel htmlFor="dateDue">Due Date:</InputLabel> 
+                              <InputLabel htmlFor="dateDue">Date Due:</InputLabel> 
                               <Input id="dateDue" name="dateDue" type="datetime-local" value={dateDue} onChange={e => setDateDue(e.target.value)}></Input>
                         </div>
                       </Box>
