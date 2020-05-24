@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, Redirect } from 'react-router-dom'
 import {AppBar, Button} from '@material-ui/core'
 import FrontTheme from '../content/pages/FrontTheme'
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -18,11 +18,15 @@ interface IUser_UpdateToken {
  
 
 const Nav: React.FC< IUser_UpdateToken > = props => {
+
+
+  let [logout, setLogout]= useState(false)
   const handleLogout = (event: React.FormEvent) => {
     event.preventDefault()
     props.updateToken('')
+    setLogout(true)
   }
-
+  
   let links = (
     <span>
       <div className="buttonNav">
@@ -113,11 +117,6 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
      studentLinks =(
       <span>
         <div className="buttonNav">
-            <Link to="/student">
-              <Button variant="contained" color="primary" className="buttonNav">
-                  Student Home
-                </Button>
-            </Link>
             <Link to="/signupclass">
               <Button variant="contained" color="primary" className="buttonNav">
                   Signup For Class
@@ -130,11 +129,26 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
             </Link>
         </div>
     </span>
-     )
-   }
-       
+     )} 
  }
 
+ if(logout){
+ 
+  return(
+    <ThemeProvider theme={FrontTheme}>
+    <AppBar>
+      <nav>
+        <DownMenu updateToken={props.updateToken}/>
+        {teacherLinks}
+          {studentLinks}
+        {links}
+      </nav>
+    </AppBar>
+    <Redirect to='/login'/>
+  </ThemeProvider>
+  )  
+}
+ 
   return (
     <ThemeProvider theme={FrontTheme}>
       <AppBar>

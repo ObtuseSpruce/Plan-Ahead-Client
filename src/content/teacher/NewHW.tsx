@@ -92,7 +92,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
     }, [])
 
     if(!props.user) {
-      return <Redirect to='/login'/>
+      return  <Redirect to='/login'/>
     }
     let userStr = props.user.position.toLowerCase() 
     if(userStr !== "teacher"){
