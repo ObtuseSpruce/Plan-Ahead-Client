@@ -10,7 +10,7 @@ import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
 interface ClassModel {
-    _id: number;
+    _id: string;
     classname:  string;
     subject:    string;
     teacher:   string;
@@ -21,12 +21,13 @@ interface ClassModel {
   }
   // interface for Student database
   export interface homeworkModel {
+     _id: string, 
     question:  string,
     dateDue: Date,
     dateAssigned: Date,
     teacher: string,
     students: Array<string>,
-    class: string,
+    class: string
   }
 
 interface eventModel {
@@ -120,7 +121,7 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                 event ={
                     title: hw.question,
                     start: hw.dateAssigned,
-                    url: '/newclass',
+                    url: '/viewhw/'+hw._id,
                     end: hw.dateDue
                 }
                 return event
