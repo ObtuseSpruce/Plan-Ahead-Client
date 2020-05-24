@@ -2,16 +2,20 @@
 
 body {
   background-color: #355c7d;
+  background-image: url('https://i.imgur.com/Y84yBjD.png');
 }
 
 .App {
+  background-image: url('https://i.imgur.com/Y84yBjD.png');
+
   background-color: #355c7d;
   text-align: center;
   color: #34222e;
 }
 
 main {
-  background-color: #355c7d;
+  /* background-color: #355c7d; */
+  /* background-image: url('https://i.imgur.com/Y84yBjD.png'); */
   margin-top: 30px;
   padding: 50px 0;
   height: auto;
@@ -58,6 +62,7 @@ footer {
   bottom: 0;
 }
 .bigbox{
+  background-image: url('https://i.imgur.com/Y84yBjD.png');
   background-color:#355c7d;
 }
 .profileNav{
