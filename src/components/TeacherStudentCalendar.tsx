@@ -181,7 +181,9 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                 <button onClick={buttonHW}>log</button>
                 <button onClick={refresh}>Clear</button> 
             </div>
-            <Calendar />
+            <div className="inputField">
+                <Calendar />
+            </div>
         </div>
     )
 }
