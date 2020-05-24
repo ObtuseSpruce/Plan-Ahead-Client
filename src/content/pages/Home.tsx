@@ -8,8 +8,10 @@ import { ThemeProvider } from '@material-ui/core/styles';
 const Home : React.FC<{}> = () =>{
   return (
     <ThemeProvider theme={FrontTheme}>
-      <div>
-        <Typography variant="h1" color="primary">Hello World!</Typography>
+      <div className="logoFont">
+        <h1>
+          Plan-Ahead
+        </h1>
       </div>
     </ThemeProvider>
   )

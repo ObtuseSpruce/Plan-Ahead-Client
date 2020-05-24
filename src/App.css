@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Shrikhand&display=swap');
+
 body {
   background-color: #355c7d;
 }
@@ -14,6 +16,16 @@ main {
   padding: 50px 0;
   height: auto;
   min-height: calc(100vh - 70px);
+}
+.logoFont {
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Shrikhand', cursive;
+  font-size: 60px;
+  color:#eb4d55;
+  text-shadow: -1px 1px  white,
+				  1px 1px  white,
+				  1px -1px 0 white,
+				  -1px -1px 0 white;
 }
 
 footer {
