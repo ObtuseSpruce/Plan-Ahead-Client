@@ -10,7 +10,7 @@ interface PropsInt {
   }
 }
 
-const StudentHome: React.FC<PropsInt> = (props) => {
+const StudentHW: React.FC<PropsInt> = (props) => {
 
   if(!props.user) {
     return <Redirect to='/login'/>
@@ -28,4 +28,4 @@ const StudentHome: React.FC<PropsInt> = (props) => {
   )
 }
 
-export default StudentHome
+export default StudentHW

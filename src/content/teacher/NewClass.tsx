@@ -4,7 +4,6 @@ import {Redirect} from 'react-router-dom'
 interface PropsInt {
     user: {
         firstname: string,
-        pic: string,
         position: string,
         _id: Object
     }
@@ -20,6 +19,7 @@ const NewClass : React.FC<PropsInt> = (props) => {
 
     if(!props.user) {
         return <Redirect to='/login'/>
+       
       }
 
     let userStr = props.user.position.toLowerCase() 

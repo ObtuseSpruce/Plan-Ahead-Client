@@ -32,7 +32,7 @@ interface ClassModel {
 interface eventModel {
     title: string,
     start: Date,
-  //  url: string,
+    url: string,
     end: Date
 }
 
@@ -120,7 +120,7 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                 event ={
                     title: hw.question,
                     start: hw.dateAssigned,
-                   // url: 'https://www.google.com',
+                    url: '/newclass',
                     end: hw.dateDue
                 }
                 return event
