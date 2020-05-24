@@ -27,6 +27,17 @@ main {
 				  1px -1px 0 white,
 				  -1px -1px 0 white;
 }
+.footerLogo {
+  display: inline;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Shrikhand', cursive;
+  font-size: 14px;
+  color:#eb4d55;
+  text-shadow: -1px 1px  #355c7d,
+				  1px 1px  #355c7d,
+				  1px -1px 0 #355c7d,
+				  -1px -1px 0 #355c7d;
+}
 
 footer {
   background-color: white;
