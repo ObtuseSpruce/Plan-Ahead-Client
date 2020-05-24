@@ -34,9 +34,9 @@ main {
   font-size: 20px;
   color: #eb4d55;
   text-shadow: -1px 1px  white,
-  1px 1px  white,
-  1px -1px 0 white,
-  -1px -1px 0 white;
+                1px 1px  white,
+                1px -1px 0 white,
+                -1px -1px 0 white;
 }
 .footerLogo {
   display: inline;
@@ -97,6 +97,9 @@ nav {
   display: inline;
   color: #333366;
   margin-right: 15px;
+}
+.dialogbox{
+  padding: 10px;
 }
 
 nav a{
