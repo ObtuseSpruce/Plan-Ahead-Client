@@ -67,6 +67,7 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
     let [hwEvents, setHwEvents] = useState<eventModel[]>([])
     let [message, setMessage] = useState('')
     let [dialogContent, setDialogContent] = useState('')
+    let [HwId, setHwId] = useState('')
     let [open, setOpen] = useState(false);
 
     let events: any = []
@@ -139,7 +140,7 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                 event ={
                     title: hw.question,
                     start: hw.dateAssigned,
-                    url: '/viewhw/'+hw._id,
+                    url: '/viewhw/'+ hw._id,
                     end: hw.dateDue
                 }
                 return event
@@ -170,10 +171,12 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                     editable={false}
                     plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
                     eventClick={ function(info) {
+                        info.jsEvent.preventDefault()
                         var eventObj = info.event;
-                        console.log(eventObj.title)
+                        console.log(eventObj.url)
                         setOpen(true)
                         setDialogContent(eventObj.title)
+                        setHwId(eventObj.url)
                       }}
                     events={hwEvents}
                      />
@@ -192,6 +195,7 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
     const handleClose = () => {
       setOpen(false);
       setDialogContent('')
+      setHwId('')
     };
 
     function SimpleDialog(props: any) {
@@ -211,6 +215,7 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                     <div className="dialogBox">
                         <p>{dialogContent}</p>
                     </div>
+                    <a href={HwId}>view homework</a>
                 </ListItem>
             </List>
           </Dialog>
