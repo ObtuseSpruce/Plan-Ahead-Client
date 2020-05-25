@@ -11,7 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 
 
-
+// a material ui styling specific to the textField component.
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -59,6 +59,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
 
     let [message, setMessage] =  React.useState<String | null>(null);
     //states for holding database information
+    // the interfaces called above are placed here
     let [allClasses, setAllClasses] = React.useState<ClassModel[]>([])
     let [allUsers, setAllUsers] = React.useState<StudentModel[]>([])
     let [classId, setClassId] =  useState('') 
@@ -191,6 +192,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
                       <Box display="flex" justifyContent="center" className="textBox">
                           <div style={{ width: '600px' }}>
                                   <TextField 
+                                  //takes the style built in makeStyles
                                   className="classes.textField"         
                                   id="filled-multiline-static"
                                   label="Homework"

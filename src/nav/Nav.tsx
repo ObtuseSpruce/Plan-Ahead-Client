@@ -1,16 +1,16 @@
+//importing components from Node_modules
 import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import {AppBar, Button} from '@material-ui/core'
 import FrontTheme from '../content/pages/FrontTheme'
 import { ThemeProvider } from '@material-ui/core/styles';
-// import DownMenu from './DownMenu'
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
- 
+//Typescript Interface
 interface IUser_UpdateToken { 
   user: {
     firstname: string,
@@ -21,11 +21,11 @@ interface IUser_UpdateToken {
  } 
 
  
-
+// Nav react component
 const Nav: React.FC< IUser_UpdateToken > = props => {
-
-
   let [logout, setLogout]= useState(false)
+  
+  //sets the logout state to true
   const handleLogout = (event: React.FormEvent) => {
     event.preventDefault()
     props.updateToken('')
@@ -33,7 +33,8 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
   }
 
   //DROP DOWN MENU for PROFILES
-const ProfileMenu = () => {
+  const ProfileMenu = () => {
+
   //logout event handler
   const handleLogout = (event: React.FormEvent) => {
     event.preventDefault()
@@ -54,6 +55,7 @@ const ProfileMenu = () => {
     handleLogout(e)
   }
 
+  // return and render the profile nav menu
   return (
     <ThemeProvider theme={FrontTheme}>
     <span>
@@ -99,8 +101,9 @@ const ProfileMenu = () => {
   );
 }
 
- //DROP DOWN MENU for SITE NAVIGATION
- const NavMenu = () => {
+//DROP DOWN MENU for SITE NAVIGATION
+const NavMenu = () => {
+
   //logout event handler
   const handleLogout = (event: React.FormEvent) => {
     event.preventDefault()
@@ -116,6 +119,7 @@ const ProfileMenu = () => {
     setAnchorEl(null);
   };
 
+  //  return and render the main navigation menu
   return (
     <ThemeProvider theme={FrontTheme}>
     <span>
@@ -149,8 +153,10 @@ const ProfileMenu = () => {
     </ThemeProvider>
   );
 }
-  
-  let links = (
+
+
+// links is the front page login nav bar, only takes you to login and signup
+let links = (
     <span>
       <div className="linkNavPos">
         <div className="buttonNav">
@@ -250,7 +256,7 @@ const ProfileMenu = () => {
  
 
  if(logout){
- 
+
   return(
     <ThemeProvider theme={FrontTheme}>
     <AppBar>
