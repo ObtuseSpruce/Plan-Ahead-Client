@@ -25,6 +25,7 @@ interface PropsInt {
 /**********************************************************************************************
  ViewSignedUpClasses: This component renders all the classes that a student has signed up for.
  *********************************************************************************************/
+
 const ViewSignedUpClasses  : React.FC<PropsInt> = (props) => {
     let [classes, setclasses] = useState<ClassModel[]>([])
 
