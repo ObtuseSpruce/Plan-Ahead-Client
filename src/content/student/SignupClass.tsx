@@ -164,6 +164,7 @@ const SignupClass : React.FC<PropsInt> = (props) => {
    return(
           <div className="inputField">
                 <h2>Sign Up for Class</h2>
+                <h5>Please keep your previously selected classes checked to keep them registered. By not selecting them, they will be removed from your rgistered classes.</h5>
                 <span className="red">{message}</span>
                 <div className="signUpTable">
                     <form onSubmit={handleSubmit}> 
