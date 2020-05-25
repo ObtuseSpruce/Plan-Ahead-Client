@@ -8,6 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 
+//Interface for the user model
 interface PropsInt {
     user: {
         firstname: string,
@@ -16,7 +17,10 @@ interface PropsInt {
     }
   }
 
+  //interface for the User model is passed here directly into the NewClass react component
 const NewClass : React.FC<PropsInt> = (props) => {
+
+  // use states called
     let [message, setMessage] =  useState('') 
     let [classname, setClassname] = useState('')
     let [teacher, setTeacher] = useState('')
@@ -31,6 +35,8 @@ const NewClass : React.FC<PropsInt> = (props) => {
 
     let userStr = props.user.position.toLowerCase() 
 
+    // a simple check to see if the user viewing the page is a teacher.
+    // if not it redirects to the homepage
      if(userStr !== "teacher"){
         return <Redirect to='/'/>
       }
@@ -39,14 +45,9 @@ const NewClass : React.FC<PropsInt> = (props) => {
         }
       console.log("user ", props.user)
 
+      // Submit function for the form that performs the fetch post call
       const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
-       
-        console.log("data to send in new class: Teacher id", teacher)
-        console.log("data to send in new class: Teacher classname", classname)
-        console.log("data to send in new class: Teacher subject", subject)
-        console.log("data to send in new class: Teacher startdate", startdate)
-        console.log("data to send in new class: Teacher enddate", enddate)
 
         // This request add a new class for this teacher and sends the class data for this teacher to the server
         fetch(process.env.REACT_APP_SERVER_URL + 'classes', {
@@ -76,6 +77,8 @@ const NewClass : React.FC<PropsInt> = (props) => {
                 console.log('error in adding new class by teacher', err)
             })
             .finally(()=>{
+              // this resets the useStates and the fields on the form
+              // after the fetch call has completed.
               setClassname('')
               setSubject('')
               setTeacher('')

@@ -14,6 +14,18 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Button from '@material-ui/core/Button'
 
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+
+const useStyles = makeStyles({
+    avatar: {
+      backgroundColor: blue[100],
+      color: blue[600],
+    },
+  });
+
+
 interface ClassModel {
     _id: string;
     classname:  string;
@@ -225,26 +237,30 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
 
     let classMap = allClasses.map((allc, i) => {
         return (
-            <option value={allc._id}>{allc.classname}</option>
-               )
+            <MenuItem value={allc._id}>{allc.classname}</MenuItem>
+        )
     }) 
   
     return(
         <div>
             <span className="red">{message}</span>
-            <div>
-                <select name="class" value= {soloClassId} 
-                        onChange={(e: any) => {
-                        console.log("class name",e.target.value)
-                        setSoloClassId(e.target.value)
-                        let classid = e.target.value
-                        callClassHW(classid)
-                        }}>
-                 <option value="" selected>Select Class</option>
+            <div className="inputField">
+            <InputLabel id="classname">Classname: </InputLabel>
+                <Select defaultValue="true" name="class" value= {soloClassId}
+                    onChange={(e: any) => {
+                    console.log("class name",e.target.value)
+                    setSoloClassId(e.target.value)
+                    let classid = e.target.value
+                    callClassHW(classid)
+                }}>
+                 <MenuItem value="" selected>Select Class</MenuItem>
                 {classMap}
-                </select>
-                <button onClick={buttonHW}>log</button>
-                <button onClick={refresh}>Clear</button> 
+                </Select>
+                <div>
+                    <Button variant="contained" onClick={buttonHW}>View Homework</Button>
+        
+                    <Button variant="contained" onClick={refresh}>Clear</Button> 
+                </div>
             </div>
             <div className="inputField">
                 <Calendar />
