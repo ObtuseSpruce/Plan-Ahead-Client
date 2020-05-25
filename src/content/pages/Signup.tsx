@@ -56,35 +56,44 @@ const Signup: React.FC<PropsInt> = props => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    //  Send the user sign up data to the server
-    fetch(process.env.REACT_APP_SERVER_URL + 'auth/signup', {
-      method: 'POST',
-      body: JSON.stringify({
-        firstname,
-        lastname,
-        email,
-        password,
-        birthdate,
-        position
-      }),
-      headers: {
-          'Content-Type' : 'application/json'
-      }
-    })
-    .then(response => {
-        console.log("Here is the response!", response)
-        if (!response.ok){
-          setMessage(`${response.status} : ${response.statusText}`)
-          return
+    console.log('position',position)
+    if(position && firstname && lastname && email && password){
+       //  Send the user sign up data to the server
+      fetch(process.env.REACT_APP_SERVER_URL + 'auth/signup', {
+        method: 'POST',
+        body: JSON.stringify({
+          firstname,
+          lastname,
+          email,
+          password,
+          birthdate,
+          position
+        }),
+        headers: {
+            'Content-Type' : 'application/json'
         }
-        response.json().then(result => {
-          console.log("result!", result)
-          props.updateToken(result.token)
+      })
+      .then(response => {
+            console.log("Here is the response!", response)
+            if (!response.ok){
+              setMessage(`${response.status} : ${response.statusText}`)
+              return
+            }
+            response.json().then(result => {
+              console.log("result!", result)
+              props.updateToken(result.token)
+            })
+          })
+        .catch(err => {
+            console.log('error in signup submit in', err)
         })
-    })
-    .catch(err => {
-        console.log('error in signup submit in', err)
-    })
+    }
+    else if(!position){
+      setMessage('Please select your profile as teacher or student')
+    }
+    else{
+      setMessage('Please select all the required fields: First Name, Last Name, Email, Password and Position')
+    }
   }
 
   if (props.user){
@@ -101,7 +110,8 @@ const Signup: React.FC<PropsInt> = props => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit} noValidate>
+        <div> <span className="red">{message}</span>  </div>
+        <form className={classes.form} onSubmit={handleSubmit} >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
