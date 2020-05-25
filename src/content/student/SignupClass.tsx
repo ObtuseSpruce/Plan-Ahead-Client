@@ -154,8 +154,11 @@ const SignupClass : React.FC<PropsInt> = (props) => {
         .catch(err => {
             console.log('error in signup class submit', err)
         })
-         // set the referRedirect to true, to redirect to the page where user can see all the classes
-        setReferRedirect(true)
+        .finally(()=>{
+             // set the referRedirect to true, to redirect to the page where user can see all the classes
+             setReferRedirect(true)
+        })
+        
     }
 
    return(
