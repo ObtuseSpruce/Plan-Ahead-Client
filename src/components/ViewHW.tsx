@@ -42,7 +42,7 @@ const ViewHW: React.FC<PropsInt > = (props) => {
   let [hw, setHw] = useState<HWModel []>([])
   let [msg,setMsg]= useState('')
 
-  // Function to get a particular assingment referenced by the homework id 
+  // Function to get a particular assignment referenced by the homework id 
   const callApi =()=>{
     console.log("match", props.match)
     if(Object.keys(props.match).length &&  props.match.params.id){
@@ -60,11 +60,11 @@ const ViewHW: React.FC<PropsInt > = (props) => {
                 setClassInfo([cl])
           })
           .catch(err=>{
-            console.log("error fetching class for the HW",err)
+            console.log("error fetching class for the HW on ViewHW",err)
            })
         })
       .catch(err=>{
-       console.log("error fetching this HW",err)
+        console.log("error fetching this HW on ViewHW",err)
         setMsg('No Homework')
       })
     }

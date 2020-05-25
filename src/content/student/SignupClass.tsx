@@ -51,7 +51,7 @@ const SignupClass : React.FC<PropsInt> = (props) => {
             fetch(process.env.REACT_APP_SERVER_URL + 'classes/student/'+studentId)
             .then(resp=>  resp.json() )
             .then(nestedData =>{
-                console.log('nestedData: student signed classes ',nestedData)
+                console.log('nestedData: student signed up classes ',nestedData)
                 classes = data;
                 if(nestedData.length !== 0){
                     classes.forEach((cl)=>{
@@ -70,7 +70,7 @@ const SignupClass : React.FC<PropsInt> = (props) => {
             })
         })
         .catch(err=>{
-            console.log("err in Api call on SignUp Class page",err)
+            console.log("err in Api call on SignUp Class page: making a request to get all the classes",err)
         })
     }
 
