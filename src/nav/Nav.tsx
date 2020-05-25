@@ -3,9 +3,14 @@ import { Link, Redirect } from 'react-router-dom'
 import {AppBar, Button} from '@material-ui/core'
 import FrontTheme from '../content/pages/FrontTheme'
 import { ThemeProvider } from '@material-ui/core/styles';
-import DownMenu from './DownMenu'
+// import DownMenu from './DownMenu'
+import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
-
+ 
 interface IUser_UpdateToken { 
   user: {
     firstname: string,
@@ -26,22 +31,142 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
     props.updateToken('')
     setLogout(true)
   }
+
+  //DROP DOWN MENU for PROFILES
+const ProfileMenu = () => {
+  //logout event handler
+  const handleLogout = (event: React.FormEvent) => {
+    event.preventDefault()
+    props.updateToken('')
+  }
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleClick = (e: any) => {
+      console.log(e.currentTarget)
+    setAnchorEl(e.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogoutMenu = (e: React.FormEvent) => {
+    handleClose()
+    handleLogout(e)
+  }
+
+  return (
+    <ThemeProvider theme={FrontTheme}>
+    <span>
+      <div className="dropDownNav">
+      <IconButton
+            color="inherit"
+            className="downDownIcon"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleClick}
+            >
+              <AccountCircle />
+      </IconButton>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>
+          <Link to="/">
+              Home
+          </Link>
+          </MenuItem>
+          <MenuItem>
+            <div className="buttonNav">
+              <Link to="/profile">
+                profile   
+              </Link>
+            </div>
+          </MenuItem>
+          <MenuItem onClick={handleLogoutMenu}>
+            <Link to='/'>
+              Logout
+            </Link>
+          </MenuItem>
+        </Menu>
+      </div>
+    </span>
+    </ThemeProvider>
+  );
+}
+
+ //DROP DOWN MENU for SITE NAVIGATION
+ const NavMenu = () => {
+  //logout event handler
+  const handleLogout = (event: React.FormEvent) => {
+    event.preventDefault()
+    props.updateToken('')
+  }
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleClick = (e: any) => {
+      console.log(e.currentTarget)
+    setAnchorEl(e.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <ThemeProvider theme={FrontTheme}>
+    <span>
+      <div className="navMenu">
+      <IconButton
+            color="inherit"
+            className="downDownIcon"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleClick}
+            >
+              <p className="navLogo">
+                P-A
+              </p>
+      </IconButton>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+        <MenuItem onClick={handleClose}>
+            {studentLinks}
+            {teacherLinks}
+          </MenuItem>
+        </Menu>
+      </div>
+    </span>
+    </ThemeProvider>
+  );
+}
   
   let links = (
     <span>
-      <div className="buttonNav">
-        <Link to="/login">
-          <Button variant="contained" color="primary" className="buttonNav">
-            Login
-          </Button>
-        </Link>
-      </div>
-      <div className="buttonNav">
-        <Link to="/signup">
-          <Button variant="contained" color="primary" className="buttonNav">
-            Signup
-          </Button>
-        </Link>
+      <div className="linkNavPos">
+        <div className="buttonNav">
+          <Link to="/login">
+            <Button variant="contained" color="primary" className="buttonNav">
+              Login
+            </Button>
+          </Link>
+        </div>
+        <div className="buttonNav">
+          <Link to="/signup">
+            <Button variant="contained" color="primary" className="buttonNav">
+              Signup
+            </Button>
+          </Link>
+        </div>
       </div>
     </span>
   )
@@ -59,55 +184,35 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
     links =(
       <span>
        <div className="buttonNav">
-         <Link to="/profile">
-           <Button variant="contained" color="primary" className="buttonNav">
-             profile
-           </Button>
-         </Link>
-       </div>
-       <div className="buttonNav">
-         <a href='/' onClick={handleLogout}>
-           <Button variant="contained" color="primary" className="buttonNav">
-             Logout
-           </Button>
-         </a>
-       </div>
-       <div className="buttonNav">
-            <Link to="/calendar">
-              <Button variant="contained" color="primary" className="buttonNav">
-                Calendar
-                </Button>
-            </Link>
-           </div>
+            <NavMenu />
+        </div>
+          <ProfileMenu />
       </span>
     )
  
     if(props.user.position == "Teacher" || props.user.position == "teacher" || props.user.position == "TEACHER" ) {
         teacherLinks =  (
          <span>
-           <div className="buttonNav">
+          <MenuItem>
+            <Link to="/calendar">
+                Calendar
+            </Link>
+          </MenuItem>
+          <MenuItem>
                <Link to="/newclass">
-                 <Button variant="contained" color="primary" className="buttonNav">
                    Add Class
-                   </Button>
                </Link>
-           </div>
-          
-           <div className="buttonNav">
+           </MenuItem>
+           <MenuItem>
            <Link to="/homework">
-             <Button variant="contained" color="primary" className="buttonNav">
                add homework
-               </Button>
            </Link>
-          </div>
-          <div className="buttonNav">
+          </MenuItem>
+          <MenuItem>
           <Link to="/classes">
-            <Button variant="contained" color="primary" className="buttonNav">
               all classes
-            </Button>
           </Link>
-         </div>
-      
+         </MenuItem>
         </span>
        )
     }
@@ -116,23 +221,33 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
      console.log("inside if")
      studentLinks =(
       <span>
+        <MenuItem>
         <div className="buttonNav">
-            <Link to="/signupclass">
-              <Button variant="contained" color="primary" className="buttonNav">
-                  Signup For Class
-                </Button>
-            </Link>
-        </div>
-        <div className="buttonNav">
-          <Link to="/viewsignedclasses">
-            <Button variant="contained" color="primary" className="buttonNav">
-              Classes Registered
-            </Button>
+          <Link to="/calendar">
+              Calendar
           </Link>
         </div>
+        </MenuItem>
+        <MenuItem>
+          <div className="buttonNav">
+              <Link to="/signupclass">
+                        Signup For Class
+              </Link>
+          </div>
+        </MenuItem>
+        <MenuItem>
+          <div className="buttonNav">
+            <Link to="/viewsignedclasses">
+                  Registered Classes
+            </Link>
+          </div>
+        </MenuItem>
     </span>
      )} 
  }
+
+
+ 
 
  if(logout){
  
@@ -140,9 +255,6 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
     <ThemeProvider theme={FrontTheme}>
     <AppBar>
       <nav>
-        <DownMenu updateToken={props.updateToken}/>
-        {teacherLinks}
-          {studentLinks}
         {links}
       </nav>
     </AppBar>
@@ -155,9 +267,6 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
     <ThemeProvider theme={FrontTheme}>
       <AppBar>
         <nav>
-          <DownMenu updateToken={props.updateToken}/>
-          {teacherLinks}
-          {studentLinks}
           {links}
         </nav>
       </AppBar>

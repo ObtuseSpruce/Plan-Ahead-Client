@@ -44,7 +44,6 @@ const App = props => {
     <Router>
       <div className="App">
         <Nav user={user} updateToken={updateToken}/>
-        <Header />
         <main>
           <Content user={user} updateToken={updateToken}/>
         </main>
