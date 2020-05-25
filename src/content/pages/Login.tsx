@@ -97,7 +97,7 @@ const Login1: React.FC<PropsInt> = props => {
           Sign in
           </Typography>
           <span className="red">{message}</span>
-          <form className={classes.form} onSubmit={handleSubmit} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit} >
             <TextField
               variant="outlined"
               margin="normal"
