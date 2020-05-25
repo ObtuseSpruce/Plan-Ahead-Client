@@ -21,39 +21,47 @@ interface PropsInt {
 interface ClassModel {
   classname:  string;
   subject:    string;
-  teachername:   string;
+  teachername: string;
  }
 
  interface HWModel{
-  question: string
-  dateAssigned: Date
-  dateDue: Date
+  question: string;
+  dateAssigned: Date;
+  dateDue: Date;
  }
 
+/**********************************************************************************************
+ ViewHW: This component renders a particular homework information for a class.
+ This page is available to both student and teachers to view hw details.
+ It is rendered when a student/teacher clicks the homework link posted on the calendar 
+ for a particular class.
+ *********************************************************************************************/ 
 const ViewHW: React.FC<PropsInt > = (props) => {
   let [user, setUser] = useState< null | PropsInt>(null)
   let [classInfo, setClassInfo] = useState<ClassModel []>([])
   let [hw, setHw] = useState<HWModel []>([])
   let [msg,setMsg]= useState('')
 
+  // Function to get a particular assingment referenced by the homework id 
   const callApi =()=>{
     console.log("match", props.match)
     if(Object.keys(props.match).length &&  props.match.params.id){
       fetch(process.env.REACT_APP_SERVER_URL + 'assignments/' + props.match.params.id)
       .then(response=> response.json())
       .then(data =>{
-          console.log(data)
-          console.log("class id",data.class)
-          setHw([data])
-          fetch(process.env.REACT_APP_SERVER_URL + 'classes/' + data.class)
-          .then(response=> response.json())
-          .then((cl)=>{
-              console.log("cl", cl)
-              setClassInfo([cl])
+            console.log(data)
+            console.log("class id",data.class)
+            setHw([data])
+            // Fetch call to get the class details including the classname and the teacher name for this particular homework
+            fetch(process.env.REACT_APP_SERVER_URL + 'classes/' + data.class)
+            .then(response=> response.json())
+            .then((cl)=>{
+                console.log("cl", cl)
+                setClassInfo([cl])
           })
           .catch(err=>{
             console.log("error fetching class for the HW",err)
-            })
+           })
         })
       .catch(err=>{
        console.log("error fetching this HW",err)
@@ -65,7 +73,6 @@ const ViewHW: React.FC<PropsInt > = (props) => {
   useEffect(() => {
     let authUser = decodeToken()
     console.log("authUser",authUser)
-   
     if(authUser !== null){
       callApi()
     }
@@ -91,14 +98,13 @@ const ViewHW: React.FC<PropsInt > = (props) => {
     return authUser;
   }
 
+  // Protect this route to logged in users. This page is available for both teachers and students
   if(!user) {
-   
     return null
   }
 
   let hwx = hw.map((h,i)=>{
     return (
-        
         <div key={i}>
           <p>Questions:&nbsp;&nbsp;&nbsp; {h.question}</p>
           <p> Assigned Date:&nbsp;&nbsp;&nbsp; {h.dateAssigned}</p>  
@@ -115,7 +121,6 @@ const ViewHW: React.FC<PropsInt > = (props) => {
         </div>
      ) 
   })
-
 
   return (
     <div className="inputField">

@@ -9,9 +9,9 @@ import {Redirect} from 'react-router-dom'
 
 interface PropsInt {
     user: {
-        firstname: string,
-        position: string,
-        _id: Object
+        firstname: string;
+        position: string;
+        _id: string;
     }
   }
 
@@ -27,6 +27,13 @@ interface PropsInt {
     enddate:    Date;
 }
 
+/************************************************************* 
+SignupClass: Component for students to sign up for the classes.
+Functionality:  Designed to show those classes also which the student has already signed up for- by having those classes as checked.
+If the student unchecks the previously selected classes, they will be unregistered and the new set of 
+checked classes will be registered. After the student, clicks the register class button, he is redirected
+to a new component where he can view his registered classes.
+***************************************************************/
 
 const SignupClass : React.FC<PropsInt> = (props) => {
     let [classes, setClasses] = useState<ClassModel[]>([])
@@ -34,8 +41,7 @@ const SignupClass : React.FC<PropsInt> = (props) => {
     let [message, setMessage] = useState('')
     let [referRedirect, setReferRedirect] = useState(false)
 
-
-    // Function to call the API and retrieve the classes
+    // Function to call the API and retrieve all the classes
     const callApi =()=>{
         fetch(process.env.REACT_APP_SERVER_URL + 'classes')
         .then(response=> response.json())
@@ -50,13 +56,13 @@ const SignupClass : React.FC<PropsInt> = (props) => {
                 if(nestedData.length !== 0){
                     classes.forEach((cl)=>{
                         nestedData.forEach((nd: ClassModel)=>{
-                            if(cl._id == nd._id){ cl.select = true  }
+                            if(cl._id === nd._id){ cl.select = true  }
                         })        
                     }) 
                 }
                 setClasses(classes)
                 let classselected = classes.filter((cl)=>{
-                    return cl.select == true
+                    return cl.select === true
                 })
                 console.log("classselected",classselected)
                 console.log("cl now ",classes)
@@ -82,7 +88,7 @@ const SignupClass : React.FC<PropsInt> = (props) => {
             return <Redirect to='/login'/>
          }
         let userStr = props.user.position.toLowerCase() 
-        if(userStr == "teacher"){
+        if(userStr === "teacher"){
             return <Redirect to='/profile'/>
         }
 
@@ -91,7 +97,7 @@ const SignupClass : React.FC<PropsInt> = (props) => {
             return <Redirect to='/viewsignedclasses'/>
         }
     
-    // Creates table rows for classes    
+    // Creates table rows for displaying classes along with check boxes associated with each one   
     let allClasses =  classes.map((cl, i)=>{
            console.log("cl",cl._id,cl.select)
         return (
@@ -111,8 +117,8 @@ const SignupClass : React.FC<PropsInt> = (props) => {
                                     return c.select
                                 })
                                 setSelectedClasses(classesWithSelect)
-                        }} 
-                        checked={cl.select}></input>
+                            }} 
+                            checked={cl.select}></input>
                     </TableCell> 
                     <TableCell>{cl.classname} </TableCell>
                     <TableCell>{cl.subject}</TableCell>
@@ -155,14 +161,13 @@ const SignupClass : React.FC<PropsInt> = (props) => {
         .finally(()=>{
              // set the referRedirect to true, to redirect to the page where user can see all the classes
              setReferRedirect(true)
-        })
-        
+        }) 
     }
 
    return(
           <div className="inputField">
                 <h2>Sign Up for Class</h2>
-                <h5>Please keep your previously selected classes checked to keep them registered. By not selecting them, they will be removed from your rgistered classes.</h5>
+                <h5>Please keep your previously selected classes checked to keep them registered. By not selecting them, they will be removed from your registered classes.</h5>
                 <span className="red">{message}</span>
                 <div className="signUpTable">
                     <form onSubmit={handleSubmit}> 

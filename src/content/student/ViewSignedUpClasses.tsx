@@ -6,10 +6,9 @@ import TableCell from '@material-ui/core/TableCell';
 
 interface PropsInt {
     user: {
-        firstname: string,
-        pic: string,
-        position: string,
-        _id: Object
+        firstname: string;
+        position: string;
+        _id: string;
     }
   }
 
@@ -23,10 +22,11 @@ interface PropsInt {
     enddate:    Date;
 }
 
+/**********************************************************************************************
+ ViewSignedUpClasses: This component renders all the classes that a student has signed up for.
+ *********************************************************************************************/
 const ViewSignedUpClasses  : React.FC<PropsInt> = (props) => {
-
     let [classes, setclasses] = useState<ClassModel[]>([])
-    let [message, setMessage] = useState('')
 
     // Getting all the classes that a student has signed up for from the server
     const callApi =()=>{
@@ -56,7 +56,7 @@ const ViewSignedUpClasses  : React.FC<PropsInt> = (props) => {
     return <Redirect to='/login'/>
     }
     let userStr = props.user.position.toLowerCase() 
-    if(userStr == "teacher"){
+    if(userStr === "teacher"){
         return <Redirect to='/profile'/>
     }
 
@@ -75,7 +75,6 @@ const ViewSignedUpClasses  : React.FC<PropsInt> = (props) => {
    return(
           <div className="inputField">
                <h2>Registered Classes</h2>
-                <span className="red">{message}</span>
                 <div className="signedUpTable">
                     <Table>
                           <thead>
