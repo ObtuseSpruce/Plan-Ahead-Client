@@ -15,14 +15,14 @@ import FrontTheme from './FrontTheme'
 import { ThemeProvider } from '@material-ui/core/styles';
 
 interface LoginPage {
-    email?: string,
-    message?: string,
-    password?: string,
+    email?: string;
+    message?: string;
+    password?: string;
 }
 
 interface PropsInt {
-    user: {exp: number} | null,
-    updateToken: (newToken: string) => void
+    user: {exp: number} | null;
+    updateToken: (newToken: string) => void;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -40,18 +40,26 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const Login1: React.FC<PropsInt> = props => {
-    const classes = useStyles();  
+
+/**********************************************************************************************
+ Login: This component renders a login page, authenticates the user and if the login is 
+ successful, redirects to profile page.
+ *********************************************************************************************/   
+const Login: React.FC<PropsInt> = props => {
+
+  const classes = useStyles();  
   // Declare and initialize state variables
   let [email, setEmail] = useState('')
   let [message, setMessage] = useState('')
   let [password, setPassword] = useState('')
 
-  // Event handlers
+  // Function called when the user clicks on the login submit button
+  // Sends the user login details to server to authenticate
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    console.log('submit', email, password)
+    // console.log('submit', email, password)
 
+    // Call to server to authenticate this user
     fetch(process.env.REACT_APP_SERVER_URL + 'auth/login', {
       method: 'POST',
       body: JSON.stringify({
@@ -76,9 +84,9 @@ const Login1: React.FC<PropsInt> = props => {
     .catch(err => {
         console.log('error loggin in', err)
     })
-
   }
 
+  // After successful login, redirects to profile
   if (props.user){
     return <Redirect to="/profile" />
   }
@@ -147,5 +155,5 @@ const Login1: React.FC<PropsInt> = props => {
   )
 }
   
-  export default Login1
+export default Login
   

@@ -1,5 +1,4 @@
 import React from 'react'
-import {Typography} from '@material-ui/core'
 import FrontTheme from './FrontTheme'
 import { ThemeProvider } from '@material-ui/core/styles';
 

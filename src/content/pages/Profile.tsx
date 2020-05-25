@@ -3,12 +3,16 @@ import {Redirect} from 'react-router-dom'
 
 interface PropsInt {
     user: {
-        firstname: string,
-        pic: string,
-        position: string
+        firstname: string;
+        position: string;
+        _id: string;
     }
 }
 
+/**********************************************************************************************
+ Profile: This component renders a profile page for teachers and students, it retrieves the
+ details of the user from the server as a student or a teacher.
+ *********************************************************************************************/ 
 const Profile: React.FC<PropsInt> = (props) => {
   let [secretMessage, setSecretMessage] = useState('')
   
@@ -39,6 +43,7 @@ const Profile: React.FC<PropsInt> = (props) => {
     })
   })
 
+  // Protect this route to logged in users. This page is available for both teachers and students
   if(!props.user) {
     return <Redirect to='/login'/>
   }
