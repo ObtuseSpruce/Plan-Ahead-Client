@@ -35,16 +35,19 @@ const useStyles = makeStyles((theme) => ({
 
 interface PropsInt {
     user: {
-        firstName: string,
-        pic: string,
+        firstName: string;
+        pic: string;
     }
     updateToken: (newToken: string | null) => void
 }
 
+/**********************************************************************************************
+ Signup: This component renders a signup page, sends a successful signedup user info to 
+ the server.
+ *********************************************************************************************/ 
 const Signup: React.FC<PropsInt> = props => {
 
   const classes = useStyles();
-
   // Declare and initialize state variables
   let [email, setEmail] = useState('')
   let [firstname, setFirstname] = useState('')
@@ -54,11 +57,13 @@ const Signup: React.FC<PropsInt> = props => {
   let [birthdate, setBirthdate] = useState('')
   let [position, setPosition] = useState('')
 
+  // Called when the user clicks on the sign up button
+  // Sends user info to the server to be stored in database
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     console.log('position',position)
     if(position && firstname && lastname && email && password){
-       //  Send the user sign up data to the server
+       // Send the user sign up data to the server
       fetch(process.env.REACT_APP_SERVER_URL + 'auth/signup', {
         method: 'POST',
         body: JSON.stringify({
@@ -96,6 +101,7 @@ const Signup: React.FC<PropsInt> = props => {
     }
   }
 
+  // After successful signup, redirects to profile
   if (props.user){
     return <Redirect to="/profile" />
   }
