@@ -45,18 +45,6 @@ const AllClasses : React.FC<PropsInt> = (props) => {
 
 
     // Function to get all the classes offered by this teacher and display them
-    const callApi =()=>{
-        fetch(process.env.REACT_APP_SERVER_URL + 'classes')
-        .then(response=> response.json())
-        .then(data =>{
-            console.log(data)
-            setclasses(data)
-        })
-        .catch(err=>{
-            console.log("err in allClasses page for the teacher ",err)
-        })
-      }
-
       const callHwApi =()=>{
           if(classId){
         fetch(process.env.REACT_APP_SERVER_URL + 'assignments/class/' + classId)
@@ -72,11 +60,25 @@ const AllClasses : React.FC<PropsInt> = (props) => {
       }
 
     useEffect(() => {
+        const callApi =(url: string)=>{
+            fetch(process.env.REACT_APP_SERVER_URL + 'classes' + url + props.user._id)
+            .then(response=> response.json())
+            .then(data =>{
+                console.log(data)
+                setclasses(data)
+            })
+            .catch(err=>{
+                console.log("err in allClasses page for the teacher ",err)
+            })
+        }
+
         if(props.user ){
             let  userStr = props.user.position.toLowerCase()
-            if(userStr == 'teacher'){
-                callApi()
-            }
+            let url
+            if(userStr == 'teacher') { url= '/teacher/' }
+            else {  url = '/student/' }
+            // call the api functions at component load
+            callApi(url)
         }
       }, [])
 
@@ -91,13 +93,9 @@ const AllClasses : React.FC<PropsInt> = (props) => {
 
     let allClasses = classes.map((cl, i) => {
         return (
-            <Box>
-                <div>
-                    <Button variant="contained" value={cl._id} onClick={() => setClassId(`${cl._id}`)}>
-                            {cl.classname}
-                    </Button>
-                </div>
-            </Box>
+            <option value={cl._id}>
+                {cl.classname}
+            </option>
         )
     })
 
@@ -134,7 +132,8 @@ const AllClasses : React.FC<PropsInt> = (props) => {
 
 
     return(
-        <div>
+    <Box justifyContent="center">
+        <div className="inputField">
             <div>View All Classes</div>
                 <div>
                 <div>
@@ -142,15 +141,17 @@ const AllClasses : React.FC<PropsInt> = (props) => {
                     console.log(classId)
                     callHwApi()
                 }}>Log it</Button>
-                <Box display="flex" justifyContent="center">
+                <select onChange={(e) => setClassId(e.target.value)}>
+                    <option value="">Select Class</option>
                     {allClasses}
-                </Box>
+                </select>
                     <div>
                         {classHomeworkMap}
                     </div>
                 </div>
             </div>
         </div>
+    </Box>
     )
 }
 

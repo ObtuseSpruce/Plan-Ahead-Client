@@ -71,7 +71,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
     useEffect(() => {
       //calls the database for all Classes
       const callClassApi =()=>{
-        fetch(process.env.REACT_APP_SERVER_URL + 'classes')
+        fetch(process.env.REACT_APP_SERVER_URL + 'classes/teacher/' + props.user._id)
         .then(response=> response.json())
         .then(data =>{
           console.log(data)
@@ -81,6 +81,8 @@ const NewHW : React.FC<PropsInt> = (props) =>{
         console.log("error fetching classes",err)
         })
       }
+     
+      
       if(props.user ){
             let  userStr = props.user.position.toLowerCase()
             if(userStr == 'teacher'){
@@ -195,7 +197,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
                                   multiline
                                   rows={4}
                                   fullWidth
-                                  defaultValue={question}
+                                  value={question}
                                   variant="filled"
                                   onChange={e => setQuestion(e.target.value)}>
                                   </TextField>
