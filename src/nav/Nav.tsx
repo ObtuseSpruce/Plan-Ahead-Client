@@ -132,7 +132,7 @@ const NavMenu = () => {
             onClick={handleClick}
             >
               <p className="navLogo">
-                P-A
+                Menu
               </p>
       </IconButton>
         <Menu
@@ -198,26 +198,26 @@ let links = (
     if(props.user.position == "Teacher" || props.user.position == "teacher" || props.user.position == "TEACHER" ) {
         teacherLinks =  (
          <span>
+         <Link to="/calendar">
           <MenuItem>
-            <Link to="/calendar">
-                Calendar
-            </Link>
+            Calendar
           </MenuItem>
+        </Link>
+        <Link to="/newclass">
           <MenuItem>
-               <Link to="/newclass">
-                   Add Class
-               </Link>
-           </MenuItem>
+            Add Class
+          </MenuItem>
+        </Link>
+        <Link to="/homework">
            <MenuItem>
-           <Link to="/homework">
-               add homework
-           </Link>
+               Add Homework
           </MenuItem>
+        </Link>
+        <Link to="/classes">
           <MenuItem>
-          <Link to="/classes">
-              all classes
-          </Link>
-         </MenuItem>
+              View All Classes
+          </MenuItem>
+        </Link>
         </span>
        )
     }
@@ -226,27 +226,21 @@ let links = (
      console.log("inside if")
      studentLinks =(
       <span>
-        <MenuItem>
-        <div className="buttonNav">
-          <Link to="/calendar">
+        <Link to="/calendar">
+          <MenuItem>
               Calendar
-          </Link>
-        </div>
-        </MenuItem>
-        <MenuItem>
-          <div className="buttonNav">
-              <Link to="/signupclass">
-                        Signup For Class
-              </Link>
-          </div>
-        </MenuItem>
-        <MenuItem>
-          <div className="buttonNav">
-            <Link to="/viewsignedclasses">
-                  Registered Classes
-            </Link>
-          </div>
-        </MenuItem>
+          </MenuItem>
+        </Link>
+        <Link to="/signupclass">
+          <MenuItem>
+            Signup For Class
+          </MenuItem>
+        </Link>
+        <Link to="/viewsignedclasses">
+         <MenuItem>
+            Registered Classes
+          </MenuItem>
+        </Link>
     </span>
      )} 
  }

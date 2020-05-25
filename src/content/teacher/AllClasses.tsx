@@ -79,7 +79,7 @@ const AllClasses : React.FC<PropsInt> = (props) => {
       }
 
       useEffect(() => {
-          //checks the user to see if they are a student or teacher
+          // checks the user to see if they are a student or teacher
           // and sets the variable 'url' to that value
           // this is for the fetch calls
         if(props.user ){
@@ -116,6 +116,7 @@ const AllClasses : React.FC<PropsInt> = (props) => {
     // has two buttons attached to it. One deletes
     // the homework entry and the other allows the user
     // to view the homework with more depth
+
     let classHomeworkMap = allHw.map((hw, i) => {
         let url = '/viewhw/'+ hw._id
         return (
