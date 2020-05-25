@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, FormEvent} from 'react'
 import {Redirect} from 'react-router-dom'
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 interface PropsInt {
     user: {
@@ -93,9 +95,9 @@ const AllClasses : React.FC<PropsInt> = (props) => {
 
     let allClasses = classes.map((cl, i) => {
         return (
-            <option value={cl._id}>
+            <MenuItem value={cl._id}>
                 {cl.classname}
-            </option>
+            </MenuItem>
         )
     })
 
@@ -141,10 +143,12 @@ const AllClasses : React.FC<PropsInt> = (props) => {
                     console.log(classId)
                     callHwApi()
                 }}>Log it</Button>
-                <select onChange={(e) => setClassId(e.target.value)}>
-                    <option value="">Select Class</option>
+                <Select onChange={(e: any) => {
+                    setClassId(e.target.value)
+                }}>
+                    <MenuItem value="" >Select Class</MenuItem>
                     {allClasses}
-                </select>
+                </Select>
                     <div>
                         {classHomeworkMap}
                     </div>
