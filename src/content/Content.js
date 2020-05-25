@@ -1,6 +1,6 @@
 // Packages
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 // Custom componentd
 import Home from './pages/Home'
