@@ -18,14 +18,6 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 
-const useStyles = makeStyles({
-    avatar: {
-      backgroundColor: blue[100],
-      color: blue[600],
-    },
-  });
-
-
 interface ClassModel {
     _id: string;
     classname:  string;

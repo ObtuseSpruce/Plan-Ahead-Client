@@ -4,7 +4,6 @@ import { Link, Redirect } from 'react-router-dom'
 import {AppBar, Button} from '@material-ui/core'
 import FrontTheme from '../content/pages/FrontTheme'
 import { ThemeProvider } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
