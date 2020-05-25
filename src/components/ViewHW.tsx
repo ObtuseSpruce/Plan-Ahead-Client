@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {Redirect} from 'react-router-dom'
 import  jwtDecode from 'jwt-decode'
 
 interface PropsInt {

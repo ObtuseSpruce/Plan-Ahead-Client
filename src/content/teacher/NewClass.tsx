@@ -2,10 +2,7 @@ import React,{ useState, FormEvent }  from 'react';
 import {Redirect} from 'react-router-dom'
 import Box from '@material-ui/core/Box';
 import Input from '@material-ui/core/Input';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 
 //Interface for the user model
