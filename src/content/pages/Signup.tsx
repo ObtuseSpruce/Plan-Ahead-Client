@@ -102,16 +102,17 @@ const Signup: React.FC<PropsInt> = props => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <div> <span className="red">{message}</span>  </div>
-        <form className={classes.form} onSubmit={handleSubmit} >
+    <CssBaseline />
+    <div className="inputField">
+    <div className={classes.paper}>
+    <Avatar className={classes.avatar}>
+    <LockOutlinedIcon />
+    </Avatar>
+    <Typography component="h1" variant="h5">
+    Sign up
+    </Typography>
+    <p>{message}</p>
+        <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -179,6 +180,7 @@ const Signup: React.FC<PropsInt> = props => {
                 <TextField
                 id="outlined-select-position"
                 select
+                required
                 label="teacher/student"
                 value={position}
                 onChange={e => setPosition(e.target.value)}
@@ -207,6 +209,7 @@ const Signup: React.FC<PropsInt> = props => {
             </Grid>
           </Grid>
         </form>
+      </div>
       </div>
     </Container>
   )
