@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import MenuItem from '@material-ui/core/MenuItem';
+import FrontTheme from './FrontTheme'
+import { ThemeProvider } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -101,6 +103,7 @@ const Signup: React.FC<PropsInt> = props => {
   }
 
   return (
+    <ThemeProvider theme={FrontTheme}>
     <Container component="main" maxWidth="xs">
     <CssBaseline />
     <div className="inputField">
@@ -212,6 +215,7 @@ const Signup: React.FC<PropsInt> = props => {
       </div>
       </div>
     </Container>
+    </ThemeProvider>
   )
 }
 
