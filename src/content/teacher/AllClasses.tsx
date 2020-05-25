@@ -4,6 +4,8 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+
 
 interface PropsInt {
     user: {
@@ -61,18 +63,19 @@ const AllClasses : React.FC<PropsInt> = (props) => {
         }
       }
 
-    useEffect(() => {
-        const callApi =(url: string)=>{
-            fetch(process.env.REACT_APP_SERVER_URL + 'classes' + url + props.user._id)
-            .then(response=> response.json())
-            .then(data =>{
-                console.log(data)
-                setclasses(data)
-            })
-            .catch(err=>{
-                console.log("err in allClasses page for the teacher ",err)
-            })
-        }
+      const callApi =(url: string)=>{
+          fetch(process.env.REACT_APP_SERVER_URL + 'classes' + url + props.user._id)
+          .then(response=> response.json())
+          .then(data =>{
+              console.log(data)
+              setclasses(data)
+          })
+          .catch(err=>{
+              console.log("err in allClasses page for the teacher ",err)
+          })
+      }
+
+      useEffect(() => {
 
         if(props.user ){
             let  userStr = props.user.position.toLowerCase()
@@ -102,13 +105,19 @@ const AllClasses : React.FC<PropsInt> = (props) => {
     })
 
     let classHomeworkMap = allHw.map((hw, i) => {
+        let url = '/viewhw/'+ hw._id
         return (
             <Box>
                 <div className="inputField">
                 <div>
                     {hw.question}
                 </div>
-                <Button value={hw._id} onClick={() => {
+                <div>
+                </div>
+                <Button variant="contained">
+                    <a href={url}> view homework</a>
+                </Button>  
+                <Button variant="contained" value={hw._id} onClick={() => {
                     fetch(process.env.REACT_APP_SERVER_URL + 'assignments/'+ hw._id, {
                         method: 'DELETE',
                         headers: {  'Content-Type' : 'application/json' }
@@ -134,25 +143,28 @@ const AllClasses : React.FC<PropsInt> = (props) => {
 
 
     return(
-    <Box justifyContent="center">
+    <Box display="flex" justifyContent="center">
         <div className="inputField">
-            <div>View All Classes</div>
+            <h1>View Current Classes & Their Homework</h1>
                 <div>
-                <div>
-                <Button onClick={() =>{
-                    console.log(classId)
-                    callHwApi()
-                }}>Log it</Button>
-                <Select onChange={(e: any) => {
-                    setClassId(e.target.value)
-                }}>
-                    <MenuItem value="" >Select Class</MenuItem>
-                    {allClasses}
-                </Select>
                     <div>
-                        {classHomeworkMap}
+                        <InputLabel id="classname">Classname: </InputLabel>
+                        <Select onChange={(e: any) => {
+                            setClassId(e.target.value)
+                        }}>
+                            <MenuItem value="" selected>Select Class</MenuItem>
+                            {allClasses}
+                        </Select>
                     </div>
-                </div>
+                    <div>
+                    <Button onClick={() =>{
+                        console.log(classId)
+                        callHwApi()
+                    }}>View Class Homework</Button>
+                    </div>
+                    <Box justifyContent="center" display="flex">
+                        {classHomeworkMap}
+                    </Box>
             </div>
         </div>
     </Box>
