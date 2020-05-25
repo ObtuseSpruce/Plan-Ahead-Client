@@ -76,6 +76,10 @@ footer {
   margin: 20px;
 }
 
+.menuNavBox {
+  text-align: center;
+}
+
 .inputField {
   text-align: center;
   border: 2px solid #34222e;
@@ -99,6 +103,42 @@ nav {
 .logoName{
   text-align: right;
 }
+.linkNavPos{
+  float: right;
+}
+.dropDownNav{
+  border-radius: 50px 50px;
+  background-color: #eb4d55;
+  float: right;
+  margin-right: 15px;
+}
+
+.navMenu{
+  border-radius: 50px 50px;
+  background-color: white;
+  float: left;
+  margin-right: 15px;
+}
+
+.dropDownIcon{
+  background-color: white;
+}
+.navLogoPos{
+  text-align-last: center; 
+}
+
+.navLogo{
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Shrikhand', cursive;
+  margin: -.1vh;
+  padding: -1vw;
+  color:#eb4d55;
+  text-shadow: -1px 1px  #355c7d,
+				  1px 1px  #355c7d,
+				  1px -1px 0 #355c7d,
+          -1px -1px 0 #355c7d;
+}
+
 .buttonNav {
   display: inline;
   color: #333366;

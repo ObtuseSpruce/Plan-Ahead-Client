@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import { ThemeProvider } from '@material-ui/core/styles';
+import FrontTheme from '../content/pages/FrontTheme'
+
 
 interface PropsInt {
   updateToken: (newToken: string)=>void 
@@ -33,11 +38,19 @@ const handleLogoutMenu = (e: React.FormEvent) => {
 
 
   return (
+    <ThemeProvider theme={FrontTheme}>
     <span>
-      <div className="buttonNav">
-        <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} variant="contained">
-          Menu
-        </Button>
+      <div className="dropDownNav">
+      <IconButton
+            color="inherit"
+            className="downDownIcon"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleClick}
+            >
+              <AccountCircle />
+      </IconButton>
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}
@@ -58,6 +71,7 @@ const handleLogoutMenu = (e: React.FormEvent) => {
         </Menu>
       </div>
     </span>
+    </ThemeProvider>
   );
 }
 

@@ -118,7 +118,7 @@ const AllClasses : React.FC<PropsInt> = (props) => {
                     <a href={url}> view homework</a>
                 </Button>  
                 <Button variant="contained" value={hw._id} onClick={() => {
-                    fetch(process.env.REACT_APP_SERVER_URL + 'assignments/'+ hw._id, {
+                    fetch(process.env.REACT_APP_SERVER_URL + 'assignments/' + hw._id, {
                         method: 'DELETE',
                         headers: {  'Content-Type' : 'application/json' }
                         })
