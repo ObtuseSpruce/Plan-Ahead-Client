@@ -27,6 +27,7 @@ interface ClassModel {
     enddate:    Date;
 }
 interface homeworkModel {
+    _id: string,
     question:  string,
     dateDue: Date,
     dateAssigned: Date,
@@ -40,6 +41,8 @@ const AllClasses : React.FC<PropsInt> = (props) => {
     let [classes, setclasses] = useState<ClassModel[]>([])
     let [classId, setClassId] = useState('')
     let [allHw, setAllHw] = useState<homeworkModel[]>([])
+    let [message, setMessage] = useState('')
+
 
     // Function to get all the classes offered by this teacher and display them
     const callApi =()=>{
@@ -105,7 +108,25 @@ const AllClasses : React.FC<PropsInt> = (props) => {
                 <div>
                     {hw.question}
                 </div>
-                <Button onClick={() => console.log('delete this')}>Delete</Button>
+                <Button value={hw._id} onClick={() => {
+                    fetch(process.env.REACT_APP_SERVER_URL + 'assignments/'+ hw._id, {
+                        method: 'DELETE',
+                        headers: {  'Content-Type' : 'application/json' }
+                        })
+                        .then(response => {
+                            if (!response.ok){
+                              setMessage(`${response.status} : ${response.statusText}`)
+                              return
+                            }
+                            response.json().then(result => {
+                            console.log("result!", result)
+                            })
+                        })
+                        .finally(() => {
+                            callHwApi()
+                        })
+                    }
+            }>Delete</Button>
                 </div>
             </Box>
         )

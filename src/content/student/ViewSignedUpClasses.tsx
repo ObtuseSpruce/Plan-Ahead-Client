@@ -78,7 +78,7 @@ const ViewSignedUpClasses  : React.FC<PropsInt> = (props) => {
 
    return(
           <div className="inputField">
-               <h2>Sign Up for Class</h2>
+               <h2>Registered Classes</h2>
                 <span className="red">{message}</span>
                 <div className="signedUpTable">
                     <Table>
