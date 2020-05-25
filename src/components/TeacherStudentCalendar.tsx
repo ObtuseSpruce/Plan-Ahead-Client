@@ -4,19 +4,18 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid'
-import { EventInput } from '@fullcalendar/core'
 import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 import Dialog from '@material-ui/core/Dialog';
 import { makeStyles } from '@material-ui/core/styles';
-
 import { blue } from '@material-ui/core/colors';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Button from '@material-ui/core/Button'
-
-
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 
 const useStyles = makeStyles({
     avatar: {
@@ -135,7 +134,6 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
     }
 
     const homeworkMap = () => {
-     //   console.log(homework)
         let event: eventModel
         if(homework.length!== 0){
          events =   homework.map((hw,i)=>{
@@ -149,7 +147,6 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
             })
         }
         setHwEvents(events)
-     //   console.log(events)
     }
 
 
@@ -190,7 +187,7 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
 
     let classMap = allClasses.map((allc, i) => {
         return (
-            <option value={allc._id}>{allc.classname}</option>
+            <MenuItem value={allc._id}>{allc.classname}</MenuItem>
         )
     }) 
   
@@ -230,20 +227,24 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
 
     return(
         <div>
-              <span className="red">{message}</span>
-            <div>
-                <select name="class" value= {soloClassId} onChange={(e: any) => {
+            <span className="red">{message}</span>
+            <div className="inputField">
+            <InputLabel id="classname">Classname: </InputLabel>
+                <Select defaultValue="true" name="class" value= {soloClassId} onChange={(e: any) => {
                     console.log("class name",e.target.value)
                     setSoloClassId(e.target.value)
                     let classid = e.target.value
                     callClassHW(classid)
                 }}>
-                 <option value="" selected>Select Class</option>
+                 <MenuItem value="" selected>Select Class</MenuItem>
                 {classMap}
-                </select>
+                </Select>
              {/*    <button onClick={getHomework}>class</button> */}
-                <button onClick={buttonHW}>log</button>
-                <button onClick={refresh}>Clear</button> 
+                <div>
+                    <Button variant="contained" onClick={buttonHW}>View Homework</Button>
+        
+                    <Button variant="contained" onClick={refresh}>Clear</Button> 
+                </div>
             </div>
             <div className="inputField">
                 <Calendar />

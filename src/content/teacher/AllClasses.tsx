@@ -6,7 +6,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 
-
+//Interface models for typescript
 interface PropsInt {
     user: {
         firstname: string,
@@ -40,15 +40,17 @@ interface homeworkModel {
     class: string,
   }
 
+
 const AllClasses : React.FC<PropsInt> = (props) => {
 
+    // useStates called and interface models integrated
     let [classes, setclasses] = useState<ClassModel[]>([])
     let [classId, setClassId] = useState('')
     let [allHw, setAllHw] = useState<homeworkModel[]>([])
     let [message, setMessage] = useState('')
 
 
-    // Function to get all the classes offered by this teacher and display them
+    // Function to get all the assignments/homeowkr offered by this class and sets the state allHw with the data
       const callHwApi =()=>{
           if(classId){
         fetch(process.env.REACT_APP_SERVER_URL + 'assignments/class/' + classId)
@@ -63,7 +65,8 @@ const AllClasses : React.FC<PropsInt> = (props) => {
         }
       }
 
-      const callApi =(url: string)=>{
+        // Function to get all the classes offered by this teacher and sets the state classes with the data
+        const callApi =(url: string)=>{
           fetch(process.env.REACT_APP_SERVER_URL + 'classes' + url + props.user._id)
           .then(response=> response.json())
           .then(data =>{
@@ -76,7 +79,9 @@ const AllClasses : React.FC<PropsInt> = (props) => {
       }
 
       useEffect(() => {
-
+          //checks the user to see if they are a student or teacher
+          // and sets the variable 'url' to that value
+          // this is for the fetch calls
         if(props.user ){
             let  userStr = props.user.position.toLowerCase()
             let url
@@ -96,6 +101,7 @@ const AllClasses : React.FC<PropsInt> = (props) => {
         return <Redirect to='/profile'/>
     }
 
+    // maps over the classes array and returns a menu item
     let allClasses = classes.map((cl, i) => {
         return (
             <MenuItem value={cl._id}>
@@ -104,6 +110,12 @@ const AllClasses : React.FC<PropsInt> = (props) => {
         )
     })
 
+
+    // maps over the homework array and generates
+    // a box that displays homework content and
+    // has two buttons attached to it. One deletes
+    // the homework entry and the other allows the user
+    // to view the homework with more depth
     let classHomeworkMap = allHw.map((hw, i) => {
         let url = '/viewhw/'+ hw._id
         return (
@@ -118,6 +130,13 @@ const AllClasses : React.FC<PropsInt> = (props) => {
                     <a href={url}> view homework</a>
                 </Button>  
                 <Button variant="contained" value={hw._id} onClick={() => {
+
+                    // this fetch command deletes the homework.
+                    // As this is the only place the delete button is called
+                    // it has been nested in the function, however this could be
+                    // popped out and the hw._id set to a state to make this
+                    // a global scoped function
+                    
                     fetch(process.env.REACT_APP_SERVER_URL + 'assignments/' + hw._id, {
                         method: 'DELETE',
                         headers: {  'Content-Type' : 'application/json' }
