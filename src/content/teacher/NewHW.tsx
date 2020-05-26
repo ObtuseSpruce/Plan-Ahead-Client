@@ -60,7 +60,6 @@ const NewHW : React.FC<PropsInt> = (props) =>{
     //states for holding database information
     // the interfaces called above are placed here
     let [allClasses, setAllClasses] = React.useState<ClassModel[]>([])
-    let [allUsers, setAllUsers] = React.useState<StudentModel[]>([])
     let [classId, setClassId] =  useState('') 
     let [teacher, setTeacher] = useState('')
     let [question, setQuestion] = useState('')
@@ -85,7 +84,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
       
       if(props.user ){
             let  userStr = props.user.position.toLowerCase()
-            if(userStr == 'teacher'){
+            if(userStr === 'teacher'){
                 // call the api functions at component load
                 callClassApi()
                 setTeacher(props.user._id)

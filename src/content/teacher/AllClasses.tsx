@@ -1,4 +1,4 @@
-import React, {useEffect, useState, FormEvent} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Redirect} from 'react-router-dom'
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
@@ -85,7 +85,7 @@ const AllClasses : React.FC<PropsInt> = (props) => {
         if(props.user ){
             let  userStr = props.user.position.toLowerCase()
             let url
-            if(userStr == 'teacher') { url= '/teacher/' }
+            if(userStr === 'teacher') { url= '/teacher/' }
             else {  url = '/student/' }
             // call the api functions at component load
             callApi(url)
