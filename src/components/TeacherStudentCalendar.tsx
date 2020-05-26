@@ -212,7 +212,7 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                                 <p>{dialogContent}</p>
                             </div>
                         </ListItem>
-                            <Button color="primary" variant="contained">
+                            <Button id="spaceButton" color="primary" variant="contained">
                                 <a href={HwId}>view homework</a>
                             </Button>
                         </div>
