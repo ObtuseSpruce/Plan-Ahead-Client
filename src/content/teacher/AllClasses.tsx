@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import FrontTheme from '../pages/FrontTheme'
+import { ThemeProvider } from '@material-ui/core/styles';
 
 //Interface models for typescript
 interface PropsInt {
@@ -120,6 +122,7 @@ const AllClasses : React.FC<PropsInt> = (props) => {
     let classHomeworkMap = allHw.map((hw, i) => {
         let url = '/viewhw/'+ hw._id
         return (
+        <ThemeProvider theme={FrontTheme}>
             <Box>
                 <div className="inputField">
                 <div>
@@ -127,10 +130,10 @@ const AllClasses : React.FC<PropsInt> = (props) => {
                 </div>
                 <div>
                 </div>
-                <Button variant="contained">
+                <Button id="spaceButton" color="primary" variant="contained">
                     <a href={url}> view homework</a>
                 </Button>  
-                <Button variant="contained" value={hw._id} onClick={() => {
+                <Button id="spaceButton" color="primary" variant="contained" value={hw._id} onClick={() => {
 
                     // this fetch command deletes the homework.
                     // As this is the only place the delete button is called
@@ -158,11 +161,13 @@ const AllClasses : React.FC<PropsInt> = (props) => {
             }>Delete</Button>
                 </div>
             </Box>
+        </ThemeProvider>
         )
     })
 
 
     return(
+    <ThemeProvider theme={FrontTheme}>
     <Box display="flex" justifyContent="center">
         <div className="inputField">
             <h1>View Current Classes & Their Homework</h1>
@@ -177,7 +182,7 @@ const AllClasses : React.FC<PropsInt> = (props) => {
                         </Select>
                     </div>
                     <div>
-                    <Button onClick={() =>{
+                    <Button color="primary" variant="contained" id="spaceButton" onClick={() =>{
                         console.log(classId)
                         callHwApi()
                     }}>View Class Homework</Button>
@@ -188,6 +193,7 @@ const AllClasses : React.FC<PropsInt> = (props) => {
             </div>
         </div>
     </Box>
+    </ThemeProvider>
     )
 }
 

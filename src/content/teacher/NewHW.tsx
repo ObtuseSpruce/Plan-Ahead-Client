@@ -8,6 +8,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
+import FrontTheme from '../pages/FrontTheme'
+import { ThemeProvider } from '@material-ui/core/styles';
 
 
 // a material ui styling specific to the textField component.
@@ -158,6 +160,7 @@ const NewHW : React.FC<PropsInt> = (props) =>{
   // Renders form to create a new assignment/hw by the teacher for a particular class
   if(props.user){
    return(
+    <ThemeProvider theme={FrontTheme}>
      <Box display="flex" justifyContent="center">
           <div className="inputField">
                 <h2>Create New Assignment</h2>
@@ -203,10 +206,11 @@ const NewHW : React.FC<PropsInt> = (props) =>{
                                   </TextField>
                           </div>
                       </Box>
-                      <Button variant="contained" type="submit">Add Assignment</Button>
+                      <Button color="primary" variant="contained" type="submit">Add Assignment</Button>
                     </form>
           </div>
         </Box>
+        </ThemeProvider>
         )
       } else {
         return (

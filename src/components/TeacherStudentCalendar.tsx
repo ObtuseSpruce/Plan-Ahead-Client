@@ -16,6 +16,8 @@ import Button from '@material-ui/core/Button'
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import FrontTheme from '../content/pages/FrontTheme'
+import { ThemeProvider } from '@material-ui/core/styles';
 
 interface ClassModel {
     _id: string;
@@ -210,7 +212,7 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                                 <p>{dialogContent}</p>
                             </div>
                         </ListItem>
-                            <Button variant="contained">
+                            <Button color="primary" variant="contained">
                                 <a href={HwId}>view homework</a>
                             </Button>
                         </div>
@@ -233,6 +235,7 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
     }) 
   
     return(
+    <ThemeProvider theme={FrontTheme}>
         <div>
             <span className="red">{message}</span>
             <div className="inputField">
@@ -248,9 +251,9 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
                 {classMap}
                 </Select>
                 <div>
-                    <Button variant="contained" onClick={buttonHW}>View Homework</Button>
+                    <Button id="spaceButton" color="primary" variant="contained" onClick={buttonHW}>View Homework</Button>
         
-                    <Button variant="contained" onClick={refresh}>Clear</Button> 
+                    <Button color="primary" variant="contained" onClick={refresh}>Clear</Button> 
                 </div>
             </div>
             <div className="inputField">
@@ -258,6 +261,7 @@ const TeacherStudentCalendar: React.FC<PropsInt> = (props) => {
             </div>
             <SimpleDialog open={open} onClose={handleClose} />
         </div>
+    </ThemeProvider>
     )
 }
 
