@@ -19,7 +19,6 @@ interface IUser_UpdateToken {
     updateToken: (newToken: string)=>void 
  } 
 
- 
 // Nav react component
 const Nav: React.FC< IUser_UpdateToken > = props => {
   let [logout, setLogout]= useState(false)
@@ -34,16 +33,10 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
   //DROP DOWN MENU for PROFILES
   const ProfileMenu = () => {
 
-  //logout event handler
-  const handleLogout = (event: React.FormEvent) => {
-    event.preventDefault()
-    props.updateToken('')
-  }
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (e: any) => {
       console.log(e.currentTarget)
-    setAnchorEl(e.currentTarget);
+      setAnchorEl(e.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);

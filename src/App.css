@@ -140,8 +140,8 @@ nav {
 }
 
 #imageHome{
-  background-color: white;
-  border: 2px solid #333366;
+  background-color: #eb4d55;
+  border: 2px solid white;
   border-radius: 50px 50px;
   padding: 10px;
   width: 400px;
