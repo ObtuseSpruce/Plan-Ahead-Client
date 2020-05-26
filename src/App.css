@@ -127,6 +127,11 @@ nav {
   text-align-last: center; 
 }
 
+#spaceButton{
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
 .navLogo{
   font-family: 'Roboto', sans-serif;
   font-family: 'Shrikhand', cursive;

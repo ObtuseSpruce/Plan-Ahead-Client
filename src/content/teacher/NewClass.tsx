@@ -4,6 +4,8 @@ import Box from '@material-ui/core/Box';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
+import FrontTheme from '../pages/FrontTheme'
+import { ThemeProvider } from '@material-ui/core/styles';
 
 //Interface for the user model
 interface PropsInt {
@@ -86,6 +88,7 @@ const NewClass : React.FC<PropsInt> = (props) => {
       }
 
    return(
+    <ThemeProvider theme={FrontTheme}>
         <Box display="flex" justifyContent="center">
           <div className="inputField">
                <h2>Create New Class</h2>
@@ -113,10 +116,11 @@ const NewClass : React.FC<PropsInt> = (props) => {
                         </div>
                     </Box>
 
-                        <Button variant="contained" type="submit">Create Class</Button>
+                        <Button color="primary" variant="contained" type="submit">Create Class</Button>
                      </form>
             </div>
           </Box>
+        </ThemeProvider>
       )
     }
 
