@@ -75,11 +75,9 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
           </Link>
           </MenuItem>
           <MenuItem>
-            <div className="buttonNav">
               <Link to="/profile">
                 Profile   
               </Link>
-            </div>
           </MenuItem>
           <MenuItem onClick={handleLogoutMenu}>
             <Link to='/'>
@@ -151,20 +149,20 @@ const NavMenu = () => {
 let links = (
     <span>
       <div className="linkNavPos">
-        <div className="buttonNav">
+        <MenuItem>
           <Link to="/login">
             <Button variant="contained" color="primary" className="buttonNav">
               Login
             </Button>
           </Link>
-        </div>
-        <div className="buttonNav">
+          </MenuItem>
+        <MenuItem>
           <Link to="/signup">
             <Button variant="contained" color="primary" className="buttonNav">
               Signup
             </Button>
           </Link>
-        </div>
+          </MenuItem>
       </div>
     </span>
   )

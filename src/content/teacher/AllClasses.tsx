@@ -131,7 +131,7 @@ const AllClasses : React.FC<PropsInt> = (props) => {
                 <div>
                 </div>
                 <Button id="spaceButton" color="primary" variant="contained">
-                    <a href={url}> view homework</a>
+                    <a href={url}>view homework</a>
                 </Button>  
                 <Button id="spaceButton" color="primary" variant="contained" value={hw._id} onClick={() => {
 

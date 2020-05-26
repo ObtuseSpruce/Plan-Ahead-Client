@@ -132,6 +132,8 @@ nav {
   margin-right: 10px;
 }
 
+
+
 .navLogo{
   font-family: 'Roboto', sans-serif;
   font-family: 'Shrikhand', cursive;
@@ -165,4 +167,8 @@ a {
   text-decoration: none;
   font-size: 14px;
   color: Black;
+}
+
+#spaceButton a{
+  color: white;
 }
