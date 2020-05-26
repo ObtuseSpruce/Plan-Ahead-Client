@@ -77,7 +77,7 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
           <MenuItem>
             <div className="buttonNav">
               <Link to="/profile">
-                profile   
+                Profile   
               </Link>
             </div>
           </MenuItem>
@@ -96,11 +96,11 @@ const Nav: React.FC< IUser_UpdateToken > = props => {
 //DROP DOWN MENU for SITE NAVIGATION
 const NavMenu = () => {
 
-  //logout event handler
+   //logout event handler
   const handleLogout = (event: React.FormEvent) => {
     event.preventDefault()
     props.updateToken('')
-  }
+  } 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (e: any) => {
@@ -188,7 +188,7 @@ let links = (
       </span>
     )
  
-    if(props.user.position == "Teacher" || props.user.position == "teacher" || props.user.position == "TEACHER" ) {
+    if(props.user.position === "Teacher" || props.user.position === "teacher" || props.user.position === "TEACHER" ) {
         teacherLinks =  (
          <span>
          <Link to="/calendar">
@@ -215,7 +215,7 @@ let links = (
        )
     }
     let userStr = props.user.position.toLowerCase() 
-    if( userStr.substr(0, 7)=="student") {
+    if( userStr.substr(0, 7)==="student") {
      console.log("inside if")
      studentLinks =(
       <span>

@@ -14,7 +14,7 @@ const Home : React.FC<{}> = () =>{
       <div className="bottomLogo">
         <p>~your academic success now~</p>
       </div>
-        <img id="imageHome" src="https://www.learnersedge.com/hs-fs/hubfs/student%20and%20teacher%20high%20five-1.jpg?width=2808&name=student%20and%20teacher%20high%20five-1.jpg"></img>
+        <img id="imageHome" src="https://www.learnersedge.com/hs-fs/hubfs/student%20and%20teacher%20high%20five-1.jpg?width=2808&name=student%20and%20teacher%20high%20five-1.jpg" alt="teacherstudent"></img>
     </div>
     </ThemeProvider>
   )

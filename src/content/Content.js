@@ -2,7 +2,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 
-// Custom componentd
+// Custom components
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
